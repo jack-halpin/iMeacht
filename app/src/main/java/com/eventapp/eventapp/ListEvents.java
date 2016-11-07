@@ -2,23 +2,13 @@ package com.eventapp.eventapp;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.Time;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.MenuItem;
 import android.widget.ListView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +20,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ListEvents extends AppCompatActivity {
 
     //This is declared in the class so it can be accessed by the inner public class
-    private ArrayAdapter<String> eventLists;
+    private EventAdapter eventLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +43,7 @@ public class ListEvents extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
-        eventLists = new ArrayAdapter<String>(this, R.layout.event_list_entry, R.id.entry_text, new ArrayList<String>());
+        eventLists = new EventAdapter(this, R.layout.event_list_entry, new ArrayList<EventListing>());
 
 
         // Assign adapter to ListView
@@ -114,12 +103,12 @@ public class ListEvents extends AppCompatActivity {
     //The class represents an asynchronous task to be carried out when the activity is loaded
     //In here we must define the URL, perform a JSON request with the parameters and parse it.
     //objects that have been defined in the parent class can be accessed here!
-    public class FetchEventInfo extends AsyncTask<String, Void, String[]> {
+    public class FetchEventInfo extends AsyncTask<String, Void, EventListing[]> {
 
         private final String LOG_TAG = FetchEventInfo.class.getSimpleName();
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected EventListing[] doInBackground(String... params) {
 
             // If there's no zip code, there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
@@ -194,15 +183,28 @@ public class ListEvents extends AppCompatActivity {
         }
 
 
-        public String[] getEventInfoFromJson(String eventInfo) throws JSONException{
+        public EventListing[] getEventInfoFromJson(String eventInfo) throws JSONException{
             JSONObject eventJson = new JSONObject(eventInfo);
             JSONObject eventlistings = eventJson.getJSONObject("events");
             JSONArray events = eventlistings.getJSONArray("event");
-            String[] resultStrs = new String[events.length()];
+            EventListing[] resultStrs = new EventListing[events.length()];
+
             for(int i = 0; i < events.length(); i++) {
+
+                String img_url;
                 JSONObject currEvent = events.getJSONObject(i);
-                Log.v(LOG_TAG, "Current Event Name: " + currEvent.getString("title"));
-                resultStrs[i] = currEvent.getString("title");
+                Log.e(LOG_TAG, currEvent.toString());
+                EventListing newEvent = new EventListing(currEvent.getString("title"));
+
+                if (currEvent.isNull("image")){
+                    Log.v(LOG_TAG, "is null");
+                    img_url = "";
+                }
+                else{
+                    img_url = currEvent.getJSONObject("image").getJSONObject("medium").getString("url");
+                    newEvent.setBitmapFromURL(img_url);
+                }
+                resultStrs[i] = newEvent;
             }
             return resultStrs;
         }
@@ -231,18 +233,16 @@ public class ListEvents extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String[] results) {
+        protected void onPostExecute(EventListing[] results) {
             Log.e(LOG_TAG, "Got here");
 
             if (results != null) {
                 eventLists.clear();
                 //mForecastAdapter.addAll(result);
                 for (int i = 0; i < results.length; i++) {
-                    Log.e(LOG_TAG, results[i].toString());
-
-                    eventLists.add(results[i].toString());
+                    eventLists.add(results[i]);
                 }
-                Log.e(LOG_TAG, "First Item: " + eventLists.getItem(0));
+                //Log.e(LOG_TAG, "First Item: " + eventLists.getItem(0));
             }
 
         }
