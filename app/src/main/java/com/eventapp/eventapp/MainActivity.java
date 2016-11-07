@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent init = new Intent(this, list_events.class);
+        Intent init = new Intent(this, ListEvents.class);
         startActivity(init);
     }
 }
