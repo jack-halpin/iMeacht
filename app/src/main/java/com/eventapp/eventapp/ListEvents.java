@@ -1,6 +1,8 @@
 package com.eventapp.eventapp;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -59,6 +62,20 @@ public class ListEvents extends Fragment {
         // Assign adapter to ListView
         listView.setAdapter(eventLists);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                                Log.e("Logger:", Integer.toString(position));
+
+                                                Context context = getActivity();
+                                                EventListing a = eventLists.getItem(position);
+                                                Intent intent = new Intent(getActivity(), DetailedEventActivity.class);
+                                                intent.putExtra("EVENT_ID", a.getId());
+
+                                                startActivity(intent);
+
+                                            }
+        });
         //FetchEventInfo fetch = new FetchEventInfo();
         //fetch.execute("hi");
         return rootView;
@@ -123,7 +140,7 @@ public class ListEvents extends Fragment {
 
                 URL url = new URL(builtUri.toString());
 
-                Log.v(LOG_TAG, "Built URI " + builtUri.toString());
+                //Log.v(LOG_TAG, "Built URI " + builtUri.toString());
 
                 //URL url = new URL("http://http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&mode=json&units=metric&ctn=7");
 
@@ -137,7 +154,7 @@ public class ListEvents extends Fragment {
                 eventJsonStr = readStream(inputStream);
 
                 //read
-                Log.v(LOG_TAG, "Event JSON String: " + eventJsonStr);
+
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
@@ -181,7 +198,6 @@ public class ListEvents extends Fragment {
 
                 String img_url;
                 JSONObject currEvent = events.getJSONObject(i);
-                Log.e(LOG_TAG, currEvent.toString());
                 EventListing newEvent = new EventListing(currEvent.getString("title"));
 
                 if (currEvent.isNull("image")){
@@ -191,6 +207,7 @@ public class ListEvents extends Fragment {
                 else{
                     img_url = currEvent.getJSONObject("image").getJSONObject("large").getString("url");
                     newEvent.setBitmapFromURL(img_url);
+                    newEvent.setId(currEvent.getString("id"));
                 }
                 resultStrs[i] = newEvent;
             }
@@ -222,7 +239,7 @@ public class ListEvents extends Fragment {
 
         @Override
         protected void onPostExecute(EventListing[] results) {
-            Log.e(LOG_TAG, "Got here");
+
 
             if (results != null) {
                 eventLists.clear();

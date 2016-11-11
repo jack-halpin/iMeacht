@@ -18,6 +18,7 @@ public class EventListing {
     //eventful API
     private String title;
     private Bitmap img;
+    private String id;
 
     public EventListing(String title){
         this.title = title;
@@ -29,6 +30,14 @@ public class EventListing {
 
     public Bitmap getImage(){
         return this.img;
+    }
+
+    public void setId(String eventId){
+        this.id = eventId;
+    }
+
+    public String getId(){
+        return this.id;
     }
 
     //Taken from http://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
