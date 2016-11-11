@@ -1,13 +1,14 @@
 package com.eventapp.eventapp;
 
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -22,17 +23,26 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ListEvents extends AppCompatActivity {
+public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
     private EventAdapter eventLists;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_events);
+        setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.activity_list_events, container, false);
+
         // Get ListView object from xml
-        ListView listView = (ListView) findViewById(R.id.activity_list);
+        ListView listView = (ListView) rootView.findViewById(R.id.activity_list);
 
         // Defined Array values to show in ListView
 
@@ -43,50 +53,28 @@ public class ListEvents extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
-        eventLists = new EventAdapter(this, R.layout.event_list_entry, new ArrayList<EventListing>());
+        eventLists = new EventAdapter(getActivity(), R.layout.event_list_entry, new ArrayList<EventListing>());
 
 
         // Assign adapter to ListView
         listView.setAdapter(eventLists);
 
-
-
-
-//        String[] tests = new String[3];
-//        tests[0] = "test";
-//        tests[1] = "test";
-//        tests[2] = "test";
-//
-//
-//
-//        eventLists =
-//                new ArrayAdapter<String>(
-//                        this, // The current context (this activity)
-//                        R.layout.event_list_entry, // The name of the layout ID.
-//                        R.id.entry_text, // The ID of the textview to populate.
-//                        new ArrayList<String>());
-//
-//        ListView listView = (ListView) findViewById(R.id.activity_list);
-//        listView.setAdapter(eventLists);
-        FetchEventInfo fetch = new FetchEventInfo();
-        fetch.execute("hi");
+        //FetchEventInfo fetch = new FetchEventInfo();
+        //fetch.execute("hi");
+        return rootView;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //We can use this to inflate the menu at the top right of the screen
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.listings_menu, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == R.id.get_info){
+
             getEventInfo();
             return true;
         }
+        Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
 
     }
@@ -129,7 +117,7 @@ public class ListEvents extends AppCompatActivity {
             try {
 
                 //Querying test URL:
-                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&location=San%20Diego";
+                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=large,block250&location=Dublin";
                 Uri builtUri = Uri.parse(testurl);
 
 
@@ -201,7 +189,7 @@ public class ListEvents extends AppCompatActivity {
                     img_url = "";
                 }
                 else{
-                    img_url = currEvent.getJSONObject("image").getJSONObject("medium").getString("url");
+                    img_url = currEvent.getJSONObject("image").getJSONObject("large").getString("url");
                     newEvent.setBitmapFromURL(img_url);
                 }
                 resultStrs[i] = newEvent;

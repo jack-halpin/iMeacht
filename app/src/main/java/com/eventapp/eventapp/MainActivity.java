@@ -1,10 +1,8 @@
 package com.eventapp.eventapp;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import static android.R.attr.start;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,7 +10,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent init = new Intent(this, ListEvents.class);
-        startActivity(init);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.listings_menu, menu);
+        return true;
+    }
+
 }
