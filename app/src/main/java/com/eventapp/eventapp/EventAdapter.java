@@ -1,6 +1,7 @@
 package com.eventapp.eventapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static com.google.android.gms.analytics.internal.zzy.e;
 
 /**
  * Created by Jack on 07/11/2016.
@@ -46,7 +49,17 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
             if (rightTextView != null) {
                 rightTextView.setText(event.getTitle());
-                desc.setText(event.getDescription());
+
+                //Format description. If the description is too long to display
+                //We need to get the first portion of it.
+                Log.e("Length of desc: ", Integer.toString(event.getDescription().length()));
+                if (event.getDescription().length() > 100){
+                    String subDesc = event.getDescription().substring(0,100) + "...";
+                    desc.setText(subDesc);
+                }
+                else {
+                    desc.setText(event.getDescription());
+                }
             }
         }
 
