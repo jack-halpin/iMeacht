@@ -26,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.google.android.gms.analytics.internal.zzy.n;
+
 public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
@@ -198,16 +200,24 @@ public class ListEvents extends Fragment {
 
                 String img_url;
                 JSONObject currEvent = events.getJSONObject(i);
-                EventListing newEvent = new EventListing(currEvent.getString("title"));
+                EventListing newEvent = new EventListing();
 
                 if (currEvent.isNull("image")){
                     Log.v(LOG_TAG, "is null");
                     img_url = "";
                 }
                 else{
+                    //Get the url for the image to be displayed
                     img_url = currEvent.getJSONObject("image").getJSONObject("large").getString("url");
-                    newEvent.setBitmapFromURL(img_url);
-                    newEvent.setId(currEvent.getString("id"));
+
+                    //Next get the event date, venue, and details
+                    String title = currEvent.getString("title");
+                    String date = currEvent.getString("start_time");
+                    String venue = currEvent.getString("venue_name");
+                    String description = currEvent.getString("description");
+                    newEvent.setEventInfo(title, img_url, date, description, venue);
+
+
                 }
                 resultStrs[i] = newEvent;
             }

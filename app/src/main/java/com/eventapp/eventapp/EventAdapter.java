@@ -36,7 +36,8 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
         if (event != null) {
             ImageView leftTextView = (ImageView) view.findViewById(R.id.entry_text);
-            TextView rightTextView = (TextView) view.findViewById(R.id.entry_text2);
+            TextView rightTextView = (TextView) view.findViewById(R.id.event_title);
+            TextView desc = (TextView) view.findViewById(R.id.event_description);
 
 
             if (leftTextView != null) {
@@ -45,6 +46,7 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
             if (rightTextView != null) {
                 rightTextView.setText(event.getTitle());
+                desc.setText(event.getDescription());
             }
         }
 
