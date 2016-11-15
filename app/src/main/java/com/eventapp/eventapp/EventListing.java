@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static android.R.attr.name;
+
 /**
  * Created by Jack on 07/11/2016.
  */
@@ -17,8 +19,28 @@ public class EventListing {
     //A really simple class for holding information related to an event that has been read in from
     //eventful API
     private String title;
+    private String img_url;
     private Bitmap img;
     private String id;
+    private String date;
+    private String detail;
+    private String venueName;
+
+    public EventListing(){
+
+    }
+
+    public String getDescription(){
+        return this.detail;
+    }
+    public void setEventInfo(String title, String img_url, String date, String detail, String venue){
+        this.title = title;
+        this.img_url = img_url;
+        this.date = date;
+        this.detail = detail;
+        this.venueName = venue;
+        setBitmapFromURL(img_url);
+    }
 
     public EventListing(String title){
         this.title = title;

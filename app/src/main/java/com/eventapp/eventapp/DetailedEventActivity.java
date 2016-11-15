@@ -13,7 +13,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String a = getIntent().getExtras().getString("EVENT_ID");
-        Log.e("object title", a);
+        //Log.e("object title", a);
         setContentView(R.layout.activity_detailed_event);
 
         TextView v = (TextView) findViewById(R.id.textView2);
