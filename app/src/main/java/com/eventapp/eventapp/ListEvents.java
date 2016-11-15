@@ -26,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.google.android.gms.analytics.internal.zzy.j;
+import static com.google.android.gms.analytics.internal.zzy.l;
 import static com.google.android.gms.analytics.internal.zzy.n;
 
 public class ListEvents extends Fragment {
@@ -78,8 +80,8 @@ public class ListEvents extends Fragment {
 
                                             }
         });
-        //FetchEventInfo fetch = new FetchEventInfo();
-        //fetch.execute("hi");
+        FetchEventInfo fetch = new FetchEventInfo();
+        fetch.execute("hi");
         return rootView;
     }
 
@@ -136,7 +138,7 @@ public class ListEvents extends Fragment {
             try {
 
                 //Querying test URL:
-                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=large,block250&location=Dublin";
+                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=blackborder250&location=Dublin";
                 Uri builtUri = Uri.parse(testurl);
 
 
@@ -208,13 +210,19 @@ public class ListEvents extends Fragment {
                 }
                 else{
                     //Get the url for the image to be displayed
-                    img_url = currEvent.getJSONObject("image").getJSONObject("large").getString("url");
+                    img_url = currEvent.getJSONObject("image").getJSONObject("blackborder250").getString("url");
 
                     //Next get the event date, venue, and details
                     String title = currEvent.getString("title");
                     String date = currEvent.getString("start_time");
                     String venue = currEvent.getString("venue_name");
-                    String description = currEvent.getString("description");
+                    String description;
+                    if (currEvent.getString("description") == "null") {
+                        description = "No information available.";
+                    }
+                    else{
+                        description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
+                    }
                     newEvent.setEventInfo(title, img_url, date, description, venue);
 
 
