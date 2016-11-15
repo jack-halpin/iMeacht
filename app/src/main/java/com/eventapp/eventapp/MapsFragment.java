@@ -1,8 +1,13 @@
 package com.eventapp.eventapp;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,21 +16,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
+    private MapView mapView;
     private GoogleMap mMap;
     private ArrayList<MapDetails> locations;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        locations = (ArrayList<MapDetails>) getIntent().getExtras().getSerializable("map");
-        setContentView(R.layout.activity_maps);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        locations = (ArrayList<MapDetails>) getArguments().getSerializable("locations");
+        SupportMapFragment mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map));
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_maps, container, false);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
