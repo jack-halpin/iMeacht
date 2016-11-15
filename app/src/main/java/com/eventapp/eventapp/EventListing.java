@@ -25,8 +25,8 @@ public class EventListing {
     private String date;
     private String detail;
     private String venueName;
-    private int lat;
-    private int lng;
+    private double lat;
+    private double lng;
 
 
     public EventListing(){
@@ -40,7 +40,7 @@ public class EventListing {
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, String detail, String venue, int lat, int lng){
+    public void setEventInfo(String title, String img_url, String date, String detail, String venue, double lat, double lng){
         this.title = title;
         this.img_url = img_url;
         this.date = date;

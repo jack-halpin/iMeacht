@@ -1,8 +1,10 @@
 package com.eventapp.eventapp;
 
 import android.animation.LayoutTransition;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,39 +12,56 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private ArrayList<MapDetails> locations;
+        private GoogleMap mMap;
+        private MapView mMapView;
+        private ArrayList<MapDetails> locations;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        locations = (ArrayList<MapDetails>) getArguments().getSerializable("locations");
-        SupportMapFragment mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map));
-        mapFragment.getMapAsync(this);
-    }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                View view = inflater.inflate(R.layout.activity_maps, container, false);
+                locations = (ArrayList<MapDetails>) getArguments().getSerializable("locations");
+                System.out.println(locations.get(1).getTitle());
+                mMapView = (MapView) view.findViewById(R.id.map_placeholder);
+                mMapView.onCreate(savedInstanceState);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_maps, container, false);
-    }
+                mMapView.onResume();
+                MapsInitializer.initialize(getActivity().getApplicationContext());
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        for (MapDetails loc : locations) {
-            LatLng latlngs = new LatLng(loc.getLat(), loc.getLng());
-            mMap.addMarker(new MarkerOptions().position(latlngs)
-                .title(loc.getTitle()).snippet(loc.getSnippet()));
+                mMapView.getMapAsync(this);
+
+
+
+                return view;
         }
-        LatLng latlngs = new LatLng(0, 0);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlngs));
-    }
+
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+                mMap = googleMap;
+                if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        mMap.setMyLocationEnabled(true);
+                }
+                LatLng latlngs;
+                latlngs = new LatLng(0, 0);
+                for (MapDetails loc : locations) {
+                        System.out.println("DAVE4: " + loc.getTitle());
+                        System.out.println("DAVE5: " + loc.getLat());
+                        System.out.println("DAVE6: " + loc.getLng());
+                        latlngs = new LatLng(loc.getLat(), loc.getLng());
+                        mMap.addMarker(new MarkerOptions().position(latlngs)
+                        .title(loc.getTitle()).snippet(loc.getSnippet()));
+                }
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(latlngs).zoom(12).build();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
 }

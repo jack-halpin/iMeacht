@@ -8,10 +8,10 @@ public class MapDetails implements Serializable {
 
     private String title;
     private String snippet;
-    private int lng;
-    private int lat;
+    private double lng;
+    private double lat;
 
-    public MapDetails(String title, String snippet, int lng, int lat) {
+    public MapDetails(String title, String snippet, double lng, double lat) {
         this.title = title;
         this.snippet = snippet;
         this.lng = lng;
@@ -26,11 +26,11 @@ public class MapDetails implements Serializable {
         return snippet;
     }
 
-    public int getLng() {
+    public double getLng() {
         return lng;
     }
 
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
 
