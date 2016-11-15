@@ -15,13 +15,16 @@ public class MapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArrayList<MapDetails> locations = (ArrayList<MapDetails>) getIntent().getExtras().getSerializable("locations");
         Bundle data = new Bundle();
-        MapDetails d = new MapDetails("d", "d", 1, 1);
-        data.putSerializable("locations", d);
+        data.putSerializable("locations", locations);
         MapFragment s = new MapFragment();
         s.setArguments(data);
         setContentView(R.layout.activity_maps);
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+    }
 }

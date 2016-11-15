@@ -4,16 +4,17 @@
     android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapActivity">
+    tools:context=".MapActivity"
+    tools:layout="@layout/activity_maps">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
+    <fragment
         android:id="@+id/map"
-        xmlns:tools="http://schemas.android.com/tools"
         android:name="com.google.android.gms.maps.SupportMapFragment"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="MapsFragment" />
+        tools:context=".MapsFragment"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

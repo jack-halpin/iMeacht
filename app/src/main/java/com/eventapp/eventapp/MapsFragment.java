@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
-    private MapView mapView;
     private GoogleMap mMap;
     private ArrayList<MapDetails> locations;
 
