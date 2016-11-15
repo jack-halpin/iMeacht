@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.R.attr.description;
 import static com.google.android.gms.analytics.internal.zzy.j;
 import static com.google.android.gms.analytics.internal.zzy.l;
 import static com.google.android.gms.analytics.internal.zzy.n;
@@ -217,6 +218,8 @@ public class ListEvents extends Fragment {
                     String title = currEvent.getString("title");
                     String date = currEvent.getString("start_time");
                     String venue = currEvent.getString("venue_name");
+                    int lat = currEvent.getInt("latitude");
+                    int lng = currEvent.getInt("longitude");
                     String description;
                     if (currEvent.getString("description") == "null") {
                         description = "No information available.";
@@ -224,7 +227,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, description, venue);
+                    newEvent.setEventInfo(title, img_url, date, description, venue, lat, lng);
 
 
                 }

@@ -25,20 +25,29 @@ public class EventListing {
     private String date;
     private String detail;
     private String venueName;
+    private int lat;
+    private int lng;
+
 
     public EventListing(){
 
     }
 
+    public MapDetails returnMapDetails(){
+        return new MapDetails(this.title, this.detail, this.lng, this.lat);
+    }
+    
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, String detail, String venue){
+    public void setEventInfo(String title, String img_url, String date, String detail, String venue, int lat, int lng){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
         this.detail = detail;
         this.venueName = venue;
+        this.lat = lat;
+        this.lng = lng;
         setBitmapFromURL(img_url);
     }
 
