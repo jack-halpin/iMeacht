@@ -40,7 +40,7 @@ public class EventListing {
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, String detail, String venue, double lat, double lng){
+    public void setEventInfo(String title, String img_url, String date, String detail, String venue, double lat, double lng, String id){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -48,6 +48,7 @@ public class EventListing {
         this.venueName = venue;
         this.lat = lat;
         this.lng = lng;
+        this.id = id;
         setBitmapFromURL(img_url);
     }
 
