@@ -149,7 +149,7 @@ public class ListEvents extends Fragment {
             try {
 
                 //Querying test URL:
-                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=blackborder250&location=Dublin";
+                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
                 Uri builtUri = Uri.parse(testurl);
 
 
@@ -221,7 +221,7 @@ public class ListEvents extends Fragment {
                 }
                 else{
                     //Get the url for the image to be displayed
-                    img_url = currEvent.getJSONObject("image").getJSONObject("blackborder250").getString("url");
+                    img_url = currEvent.getJSONObject("image").getJSONObject("block200").getString("url");
 
                     //Next get the event date, venue, and details
                     String title = currEvent.getString("title");
