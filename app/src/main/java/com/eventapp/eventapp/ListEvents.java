@@ -105,6 +105,10 @@ public class ListEvents extends Fragment {
             Intent intent = new Intent(getActivity(), MapActivity.class);
             intent.putExtra("locations", locations);
             startActivity(intent);
+        } else if(id == R.id.Preferences){
+
+            Intent intent = new Intent(getActivity(), Preferences.class);
+            startActivity(intent);
         }
         Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
