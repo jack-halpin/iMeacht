@@ -130,6 +130,9 @@ public class ListEvents extends Fragment {
         @Override
         protected EventListing[] doInBackground(String... params) {
 
+
+            // Log.d("ListEvents", "Testing log message! First parameter listed is: " + params[0].toString());
+
             // If there's no zip code, there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
                 return null;
@@ -149,7 +152,12 @@ public class ListEvents extends Fragment {
             try {
 
                 //Querying test URL:
+
+                // Original URL
                 final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
+
+//                 final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin&keywords=";
+
                 Uri builtUri = Uri.parse(testurl);
 
 
@@ -173,7 +181,7 @@ public class ListEvents extends Fragment {
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
-                // If the code didn't successfully get the weather data, there's no point in attemping
+                // If the code didn't successfully get the weather data, there's no point in attempting
                 // to parse it.
                 return null;
             } finally {
