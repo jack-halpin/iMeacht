@@ -1,6 +1,7 @@
 package com.eventapp.eventapp;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -52,6 +54,13 @@ public class DetailedEventActivity extends AppCompatActivity {
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
         db.addEventID(a);
+
+        Context context = getApplicationContext();
+        CharSequence text = "Event Saved!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 }
