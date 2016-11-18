@@ -14,7 +14,6 @@ import java.util.Calendar;
 public class DetailedEventActivity extends AppCompatActivity {
 
     private EventListing E;
-    private EventDbOpenHelper myHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,10 @@ public class DetailedEventActivity extends AppCompatActivity {
     /** Save button listener method*/
     public void addSavedEvent(View view) {
         String a = getIntent().getExtras().getString("EVENT_ID");
-        ContentValues val = new ContentValues();
-        val.put(EventDbOpenHelper.ACT_NAME, a);
-        myHandler.getWritableDatabase().insert(EventDbOpenHelper.TABLE_NAME, null, val);
-        val.clear();
+
+        EventDbOpenHelper db = new EventDbOpenHelper(this);
+
+        db.addEventID(a);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.eventapp.eventapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -41,6 +42,18 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    public void addEventID(String id) {
+        Log.e("addEventID", id);
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues value = new ContentValues();
+        value.put(ACT_NAME, id);
+
+        db.insert(TABLE_NAME, null, value);
+
+        db.close();
     }
 
     void deleteDatabase() { mContext.deleteDatabase(NAME); }
