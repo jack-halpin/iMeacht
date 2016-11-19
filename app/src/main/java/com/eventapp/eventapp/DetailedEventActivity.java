@@ -47,7 +47,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** Save button listener method*/
+    // Save button listener method
     public void addSavedEvent(View view) {
         String a = getIntent().getExtras().getString("EVENT_ID");
 

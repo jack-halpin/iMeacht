@@ -109,6 +109,9 @@ public class ListEvents extends Fragment {
 
             Intent intent = new Intent(getActivity(), Preferences.class);
             startActivity(intent);
+        } else if(id == R.id.saved_events){
+            Intent intent = new Intent(getActivity(), SavedEventsActivity.class);
+            startActivity(intent);
         }
         Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
