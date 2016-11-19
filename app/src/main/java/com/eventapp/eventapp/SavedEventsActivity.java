@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by devcon90 on 11/14/16.
@@ -22,6 +23,24 @@ public class SavedEventsActivity extends AppCompatActivity {
 
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
-        Log.e("saved events", db.getAllSavedEvents().toString());
+        String ids = db.getAllSavedEvents().toString();
+
+        Log.e("saved events", ids);
+
+        TextView v = (TextView) findViewById(R.id.textViewSavedEvents);
+        v.setText(ids);
+    }
+
+    public void deleteSavedEvents(View view) {
+        EventDbOpenHelper db = new EventDbOpenHelper(this);
+
+        db.deleteDatabase();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Events Deleted";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }
