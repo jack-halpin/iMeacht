@@ -71,12 +71,12 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         String id = null;
         if (cursor.moveToFirst()) {
             do {
-                id = new String(cursor.getString(0));
+                id = new String(cursor.getString(1));
                 savedEvents.add(id);
             } while (cursor.moveToNext());
         }
         Log.e("getAllSavedEvents()", savedEvents.toString());
-        
+
         return savedEvents;
     }
 
