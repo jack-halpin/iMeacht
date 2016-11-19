@@ -2,9 +2,13 @@ package com.eventapp.eventapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by devcon90 on 11/14/16.
@@ -54,6 +58,26 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, value);
 
         db.close();
+    }
+
+    public List<String> getAllSavedEvents() {
+        List<String> savedEvents = new LinkedList<String>();
+
+        String query = "SELECT * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        String id = null;
+        if (cursor.moveToFirst()) {
+            do {
+                id = new String(cursor.getString(0));
+                savedEvents.add(id);
+            } while (cursor.moveToNext());
+        }
+        Log.e("getAllSavedEvents()", savedEvents.toString());
+        
+        return savedEvents;
     }
 
     void deleteDatabase() { mContext.deleteDatabase(NAME); }
