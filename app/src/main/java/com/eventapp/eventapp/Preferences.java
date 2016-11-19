@@ -1,11 +1,15 @@
 package com.eventapp.eventapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -35,10 +39,12 @@ public class Preferences extends AppCompatActivity {
                                         boolean isChecked) {
                         if (isChecked) {
                             // add to array
-                            selectedItems.add(indexSelected);
+                            selectedItems.add(items[indexSelected]);
                         } else if (selectedItems.contains(indexSelected)) {
                             // otherwise remove it
-                            selectedItems.remove(Integer.valueOf(indexSelected));
+//                            selectedItems.remove(Integer.valueOf(indexSelected));
+                            // original code ^, not sure about this
+                            selectedItems.remove(items[indexSelected]);
                         }
                     }
                 })
@@ -66,17 +72,35 @@ public class Preferences extends AppCompatActivity {
     }
     public boolean saveArray(ArrayList PrefArray) {
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mEdit1 = sp.edit();
+        SharedPreferences preferences = getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
-        mEdit1.putInt("Status_size", PrefArray.size());
+//        editor.putInt("Status_size", PrefArray.size());
 
         for (int i = 0; i < PrefArray.size(); i++) {
-            mEdit1.remove("Status_" + i);
-            mEdit1.putString("Status_" + i, PrefArray.get(i).toString());
+            editor.remove("Pref_" + i);
+            editor.putString("Pref_" + i, PrefArray.get(i).toString());
         }
 
-        return mEdit1.commit();
+//        Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show();
+        // // TODO: 19/11/2016 Remove testing code!
+        Toast.makeText(this, "Query string: " + getPrefString(), Toast.LENGTH_LONG).show();
 
+        return editor.commit();
+
+    }
+
+    public String getPrefString(){
+        SharedPreferences sharedPref = getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
+        int size = sharedPref.getAll().size();
+
+        String pref = "&keywords=";
+        for(int i = 0; i < size; i++){
+            pref += sharedPref.getString("Pref_" + i, "");
+            if(i != (size-1)){
+                pref += "&";
+            }
+        }
+        return pref;
     }
 }
