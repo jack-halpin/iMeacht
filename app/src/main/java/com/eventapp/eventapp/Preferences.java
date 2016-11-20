@@ -54,13 +54,14 @@ public class Preferences extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         // code to save 'selectedItems' preferences to DB goes in here
                         saveArray(selectedItems);
+                        finish();
 
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        //  code to cancel here
+                        finish();
 
                     }
                 });
@@ -75,7 +76,7 @@ public class Preferences extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.clear().commit();
+        editor.clear().apply();
 
         for (int i = 0; i < PrefArray.size(); i++) {
             editor.putString("Pref_" + i, PrefArray.get(i).toString());

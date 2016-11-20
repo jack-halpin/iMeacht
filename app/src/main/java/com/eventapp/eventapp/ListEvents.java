@@ -162,11 +162,11 @@ public class ListEvents extends Fragment {
 
                 // Original URL
                 final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
-//                Preferences prefString = new Preferences();
+
 //                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin" + prefString.getPrefString();
 
-                Uri builtUri = Uri.parse(testurl);
 
+                Uri builtUri = Uri.parse(testurl);
 
                 URL url = new URL(builtUri.toString());
 
