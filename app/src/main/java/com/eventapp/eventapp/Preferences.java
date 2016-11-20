@@ -75,12 +75,13 @@ public class Preferences extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-//        editor.putInt("Status_size", PrefArray.size());
+        editor.clear().commit();
 
         for (int i = 0; i < PrefArray.size(); i++) {
-            editor.remove("Pref_" + i);
             editor.putString("Pref_" + i, PrefArray.get(i).toString());
         }
+
+        editor.commit();
 
 //        Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show();
         // // TODO: 19/11/2016 Remove testing code!
