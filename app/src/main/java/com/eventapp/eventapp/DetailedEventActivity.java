@@ -8,6 +8,7 @@ import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +21,18 @@ public class DetailedEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String a = getIntent().getExtras().getString("EVENT_ID");
-        Log.e("object title", a);
+//        String a = getIntent().getExtras().getString("EVENT_ID");
+//        Log.e("object title", a);
+
+        E = getIntent().getExtras().getParcelable("EVENT_OBJ");
+
         setContentView(R.layout.activity_detailed_event);
 
+        ImageView img = (ImageView) findViewById(R.id.imageViewDetailed);
+        img.setImageBitmap(E.getImage());
+
         TextView v = (TextView) findViewById(R.id.textView2);
-        v.setText(a);
+        v.setText(E.getTitle());
     }
 
     /** Called when the user clicks the Send button */
@@ -53,7 +60,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
-        db.addEventID(a);
+        db.addEventID(E.getTitle());
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";

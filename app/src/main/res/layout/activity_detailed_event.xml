@@ -13,16 +13,6 @@
     tools:context="com.eventapp.eventapp.DetailedEventActivity">
 
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
-        android:id="@+id/textView2"
-        android:textColor="@android:color/background_light" />
-
     <Button
         android:text="Save Event"
         android:layout_width="wrap_content"
@@ -50,4 +40,21 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/map_event" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cast_album_art_placeholder"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageViewDetailed" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textColor="@android:color/background_light"
+        android:layout_below="@+id/imageViewDetailed"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

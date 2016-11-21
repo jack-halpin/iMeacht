@@ -75,8 +75,8 @@ public class ListEvents extends Fragment {
                                                 Context context = getActivity();
                                                 EventListing a = eventLists.getItem(position);
                                                 Intent intent = new Intent(getActivity(), DetailedEventActivity.class);
-                                                intent.putExtra("EVENT_ID", a.getId());
-
+//                                                intent.putExtra("EVENT_ID", a.getId());
+                                                intent.putExtra("EVENT_OBJ", a);
                                                 startActivity(intent);
 
                                             }
