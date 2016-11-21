@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/save_button"
         android:layout_centerHorizontal="true"
-        android:onClick="addCalendar" />
+        android:onClick="addCalendar"
         android:id="@+id/share_event" />
 
     <Button
@@ -39,7 +39,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/map_event" />
+        android:id="@+id/map_event"
+        android:onClick="addDetailedEventtoMap" />
 
     <ImageView
         android:layout_width="wrap_content"

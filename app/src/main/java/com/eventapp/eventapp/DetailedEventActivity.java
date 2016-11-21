@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class DetailedEventActivity extends AppCompatActivity {
 
@@ -55,12 +57,26 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     // Save button listener method
-    public void addSavedEvent(View view) {
-        String a = getIntent().getExtras().getString("EVENT_ID");
+    public boolean addSavedEvent(View view) {
+//        String a = getIntent().getExtras().getString("EVENT_ID");
 
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
-        db.addEventID(E.getTitle());
+        String id_check = E.getId();
+        List<String> eventList = db.getAllSavedEvents();
+
+        for(String str: eventList) {
+            if(str.trim().contains(id_check)) {
+                Context context = getApplicationContext();
+                CharSequence text = "Event Has Already Been Saved!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                return false;
+                }
+            }
+        db.addEvent(id_check, E.getTitle());
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";
@@ -68,6 +84,15 @@ public class DetailedEventActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        return true;
     }
 
+    public void addDetailedEventtoMap(View view) {
+        ArrayList<MapDetails> locations = new ArrayList();
+        locations.add(E.returnMapDetails());
+        Log.e("location", String.valueOf(E.returnMapDetails()));
+//        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+//        intent.putExtra("locations", locations);
+//        startActivity(intent);
+    }
 }
