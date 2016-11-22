@@ -3,6 +3,7 @@ package com.eventapp.eventapp;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,7 +41,22 @@ public class ListEvents extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Log.e("Prefs", getPrefString());
 
+    }
+
+    public String getPrefString() {
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
+        int size = sharedPref.getAll().size();
+
+        String pref = "&keywords=";
+        for (int i = 0; i < size; i++) {
+            pref += sharedPref.getString("Pref_" + i, "");
+            if (i != (size - 1)) {
+                pref += "&";
+            }
+        }
+        return pref;
     }
 
     @Override
