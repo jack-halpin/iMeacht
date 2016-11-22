@@ -53,9 +53,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 LatLng latlngs;
                 latlngs = new LatLng(0, 0);
                 for (MapDetails loc : locations) {
-                        System.out.println("DAVE4: " + loc.getTitle());
-                        System.out.println("DAVE5: " + loc.getLat());
-                        System.out.println("DAVE6: " + loc.getLng());
                         latlngs = new LatLng(loc.getLat(), loc.getLng());
                         mMap.addMarker(new MarkerOptions().position(latlngs)
                         .title(loc.getTitle()).snippet(loc.getSnippet()));
