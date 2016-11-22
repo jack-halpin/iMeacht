@@ -52,7 +52,7 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
                 //Format description. If the description is too long to display
                 //We need to get the first portion of it.
-                Log.e("Length of desc: ", Integer.toString(event.getDescription().length()));
+
                 if (event.getDescription().length() > 100){
                     String subDesc = event.getDescription().substring(0,100) + "...";
                     desc.setText(subDesc);

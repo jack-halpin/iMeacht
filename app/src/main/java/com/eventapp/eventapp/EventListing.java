@@ -101,14 +101,14 @@ public class EventListing implements Parcelable {
     //Taken from http://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
     public void setBitmapFromURL(String src) {
         try {
-            Log.e("src",src);
+
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            Log.e("Bitmap","returned");
+
             this.img = myBitmap;
         } catch (IOException e) {
             e.printStackTrace();
