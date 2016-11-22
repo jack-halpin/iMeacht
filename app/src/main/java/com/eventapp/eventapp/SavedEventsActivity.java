@@ -11,11 +11,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by devcon90 on 11/14/16.
  */
 
 public class SavedEventsActivity extends AppCompatActivity {
+
+//    private EventAdapter eAd;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_events);
@@ -23,12 +29,27 @@ public class SavedEventsActivity extends AppCompatActivity {
 
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
-        String ids = db.getAllSavedEvents().toString();
+//        String ids = db.getAllSavedEvents().toString();
+//        ListView listView = (ListView) findViewById(R.id.activity_list);
+        ArrayList<EventListing> savedEvents = db.getAllSavedEvents();
 
-        Log.e("saved events", ids);
+        String all = "";
+
+        for (int i = 0; i < savedEvents.size(); i++){
+//            savedEvents.get(i).setBitmapFromURL(savedEvents.get(i).getImgUrl());
+            all += savedEvents.get(i).getTitle() + "\n";
+            Log.e("savedEVents", savedEvents.get(i).toString());
+        }
+//
+//        eAd = new EventAdapter(this, R.layout.event_list_entry,savedEvents);
+//        listView.setAdapter(eAd);
+
+//        String all = savedEvents.toString();
+
+        Log.e("saved events", all);
 
         TextView v = (TextView) findViewById(R.id.textViewSavedEvents);
-        v.setText(ids);
+        v.setText(all);
     }
 
     public void deleteSavedEvents(View view) {

@@ -117,9 +117,13 @@ public class EventListing implements Parcelable {
         return this.title;
     }
 
+    public void setTitle(String title) { this.title = title; }
+
     public Bitmap getImage(){
         return this.img;
     }
+
+    public void setImage(Bitmap img) {this.img = img; }
 
     public String getId(){
         return this.id;
@@ -128,6 +132,8 @@ public class EventListing implements Parcelable {
     public String getDate(){
         return this.date;
     }
+
+    public void setId(String id) { this.id = id; }
 
     public String getImgUrl() { return this.img_url; }
 
@@ -141,12 +147,22 @@ public class EventListing implements Parcelable {
         startTime.setTime(sdf.parse(this.date));
         return startTime;
     }
+    public void setImgUrl(String img_url) { this.img_url = img_url; }
+
+    public String getDate() { return this.date; }
+
+    public void setDate(String date) { this.date = date; }
 
     public String getDetails() { return this.detail; }
+
+    public void setDetails(String detail) { this.detail = detail; }
 
     public String getVenueName() { return this.venueName; }
 
     public String getUrl() { return this.url; }
+
+    public void setVenueName(String venue) { this.venueName = venue; }
+
 
     @Override
     public int describeContents() {

@@ -1,6 +1,5 @@
 package com.eventapp.eventapp;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DetailedEventActivity extends AppCompatActivity {
@@ -91,7 +89,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
         String id_check = E.getId();
-        List<String> eventList = db.getAllSavedEvents();
+        List<String> eventList = db.getAllSavedEventsIDS();
 
         for(String str: eventList) {
             if(str.trim().contains(id_check)) {
@@ -104,7 +102,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 return false;
                 }
             }
-        db.addEvent(id_check, E.getTitle());
+        db.addEvent(id_check, E.getTitle(), E.getDate(), E.getVenueName(), E.getDetails(), E.getImgUrl());
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";
