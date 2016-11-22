@@ -269,9 +269,11 @@ public class ListEvents extends Fragment {
                     String title = currEvent.getString("title");
                     String date = currEvent.getString("start_time");
                     String venue = currEvent.getString("venue_name");
+                    int allDay = currEvent.getInt("all_day");
                     double lat = currEvent.getDouble("latitude");
                     double lng = currEvent.getDouble("longitude");
                     String id = currEvent.getString("id");
+                    String url = currEvent.getString("url");
                     String description;
                     if (currEvent.getString("description") == "null") {
                         description = "No information available.";
@@ -279,7 +281,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, description, venue, lat, lng, id);
+                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, lat, lng, id, url);
 
 
                 }

@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static android.R.attr.name;
 
@@ -27,6 +30,8 @@ public class EventListing implements Parcelable {
     private String date;
     private String detail;
     private String venueName;
+    private String url;
+    private int allDay;
     private double lat;
     private double lng;
 
@@ -45,6 +50,8 @@ public class EventListing implements Parcelable {
         venueName = in.readString();
         lat = in.readDouble();
         lng = in.readDouble();
+        allDay = in.readInt();
+        url = in.readString();
     }
 
     public static final Creator<EventListing> CREATOR = new Creator<EventListing>() {
@@ -66,15 +73,17 @@ public class EventListing implements Parcelable {
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, String detail, String venue, double lat, double lng, String id){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, double lat, double lng, String id, String url){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
+        this.allDay = allDay;
         this.detail = detail;
         this.venueName = venue;
         this.lat = lat;
         this.lng = lng;
         this.id = id;
+        this.url = url;
         setBitmapFromURL(img_url);
     }
 
@@ -116,13 +125,28 @@ public class EventListing implements Parcelable {
         return this.id;
     }
 
+    public String getDate(){
+        return this.date;
+    }
+
     public String getImgUrl() { return this.img_url; }
 
-    public String getDate() { return this.date; }
+    public boolean getAllDay(){
+        return (this.allDay > 0);
+    }
+
+    public Calendar getStartTime() throws ParseException{
+        Calendar startTime = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime.setTime(sdf.parse(this.date));
+        return startTime;
+    }
 
     public String getDetails() { return this.detail; }
 
     public String getVenueName() { return this.venueName; }
+
+    public String getUrl() { return this.url; }
 
     @Override
     public int describeContents() {
@@ -140,5 +164,7 @@ public class EventListing implements Parcelable {
         parcel.writeString(venueName);
         parcel.writeDouble(lat);
         parcel.writeDouble(lng);
+        parcel.writeInt(allDay);
+        parcel.writeString(url);
     }
 }

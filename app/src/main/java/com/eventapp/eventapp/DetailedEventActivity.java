@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -65,21 +66,21 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     /** Called when the user clicks the Send button */
-    public void addCalendar(View view) {
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2016, 10, 16, 18, 30);
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(2016, 10, 16, 20, 30);
+    public void addCalendar(View view) throws ParseException{
+        //Calendar beginTime = Calendar.getInstance();
+        //beginTime.set(2016, 10, 16, 18, 30);
+        //Calendar endTime = Calendar.getInstance();
+        //endTime.set(2016, 10, 16, 20, 30);
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, "Android Swotting")
-                .putExtra(CalendarContract.Events.DESCRIPTION, "This is when I sit around trying to" +
-                        "code in Android")
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, "Boardroom Science Building")
-                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                .putExtra(Intent.EXTRA_EMAIL, "patrick.harney@gmail.com, patrick.harney@ucdconnect.ie");
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, E.getStartTime().getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, (E.getStartTime().getTimeInMillis() + (2*60*60*1000)))
+                .putExtra(CalendarContract.Events.ALL_DAY, E.getAllDay())
+                .putExtra(CalendarContract.Events.TITLE, E.getTitle())
+                .putExtra(CalendarContract.Events.DESCRIPTION, E.getDetails())
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, E.getVenueName())
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+                //.putExtra(Intent.EXTRA_EMAIL, "patrick.harney@gmail.com, patrick.harney@ucdconnect.ie");
         startActivity(intent);
     }
 
@@ -129,9 +130,9 @@ public class DetailedEventActivity extends AppCompatActivity {
             case R.id.menu_item_share:
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBody = "Check it out";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                //String shareBody = "Check it out";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, E.getTitle());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, E.getUrl());
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 return true;
             default:
