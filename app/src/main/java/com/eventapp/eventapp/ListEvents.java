@@ -27,7 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static android.R.attr.description;
 import static com.google.android.gms.analytics.internal.zzy.j;
 import static com.google.android.gms.analytics.internal.zzy.k;
 import static com.google.android.gms.analytics.internal.zzy.l;
