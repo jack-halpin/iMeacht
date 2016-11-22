@@ -123,21 +123,6 @@ public class DetailedEventActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Call to update the share intent
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-        }
-    }
-
-    public Intent doShare() {
-        // populate the share intent with data
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "Put whatever you want");
-        return intent;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
