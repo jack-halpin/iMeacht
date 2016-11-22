@@ -11,4 +11,11 @@
     <item android:id="@+id/settings"
         android:title="Settings"
         app:showAsAction="never"/>
+    <item android:id="@+id/saved_events"
+        android:title="Saved Events"
+        app:showAsAction="never"/>
+    <item android:id="@+id/Preferences"
+        android:title="Preferences"
+        app:showAsAction="never"/>
+    <!--android:onClick="Preferences"-->
 </menu>

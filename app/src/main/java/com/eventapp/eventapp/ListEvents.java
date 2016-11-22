@@ -3,6 +3,7 @@ package com.eventapp.eventapp;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 import static android.R.attr.description;
 import static com.google.android.gms.analytics.internal.zzy.j;
+import static com.google.android.gms.analytics.internal.zzy.k;
 import static com.google.android.gms.analytics.internal.zzy.l;
 import static com.google.android.gms.analytics.internal.zzy.n;
 
@@ -40,13 +42,33 @@ public class ListEvents extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Log.e("Prefs", getPrefString());
+
 
     }
+
+    public String getPrefString() {
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
+        int size = sharedPref.getAll().size();
+
+        String pref = "&keywords=";
+        for (int i = 0; i < size; i++) {
+            pref += sharedPref.getString("Pref_" + i, "");
+            if (i != (size - 1)) {
+                pref += "&";
+            }
+        }
+        return pref;
+    }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.e("onCreateView: ", "Called");
         View rootView = inflater.inflate(R.layout.activity_list_events, container, false);
 
         // Get ListView object from xml
@@ -75,14 +97,12 @@ public class ListEvents extends Fragment {
                                                 Context context = getActivity();
                                                 EventListing a = eventLists.getItem(position);
                                                 Intent intent = new Intent(getActivity(), DetailedEventActivity.class);
-                                                intent.putExtra("EVENT_ID", a.getId());
-
+//                                                intent.putExtra("EVENT_ID", a.getId());
+                                                intent.putExtra("EVENT_OBJ", a);
                                                 startActivity(intent);
 
                                             }
         });
-        FetchEventInfo fetch = new FetchEventInfo();
-        fetch.execute("hi");
         return rootView;
     }
 
@@ -105,6 +125,13 @@ public class ListEvents extends Fragment {
             Intent intent = new Intent(getActivity(), MapActivity.class);
             intent.putExtra("locations", locations);
             startActivity(intent);
+        } else if(id == R.id.Preferences){
+            Intent intent = new Intent(getActivity(), Preferences.class);
+            startActivity(intent);
+        } else if(id == R.id.saved_events){
+            Intent intent = new Intent(getActivity(), SavedEventsActivity.class);
+            startActivity(intent);
+            return true;
         }
         Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
@@ -112,12 +139,20 @@ public class ListEvents extends Fragment {
     }
 
     public void getEventInfo(){
+        if (eventLists.isEmpty() == true){
+            Log.e("E", "is empty");
+        }
         //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
+        Log.e("getEventInfo:", "called");
         FetchEventInfo fetch = new FetchEventInfo();
         fetch.execute("test");
     }
 
-
+    @Override
+    public void onStart(){
+        super.onStart();
+        getEventInfo();
+    }
 
 
     //The class represents an asynchronous task to be carried out when the activity is loaded
@@ -129,6 +164,9 @@ public class ListEvents extends Fragment {
 
         @Override
         protected EventListing[] doInBackground(String... params) {
+
+
+            // Log.d("ListEvents", "Testing log message! First parameter listed is: " + params[0].toString());
 
             // If there's no zip code, there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
@@ -149,9 +187,14 @@ public class ListEvents extends Fragment {
             try {
 
                 //Querying test URL:
-                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=blackborder250&location=Dublin";
-                Uri builtUri = Uri.parse(testurl);
 
+                // Original URL
+                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
+
+//                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin" + prefString.getPrefString();
+
+
+                Uri builtUri = Uri.parse(testurl);
 
                 URL url = new URL(builtUri.toString());
 
@@ -173,7 +216,7 @@ public class ListEvents extends Fragment {
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
-                // If the code didn't successfully get the weather data, there's no point in attemping
+                // If the code didn't successfully get the weather data, there's no point in attempting
                 // to parse it.
                 return null;
             } finally {
@@ -216,12 +259,12 @@ public class ListEvents extends Fragment {
                 EventListing newEvent = new EventListing();
 
                 if (currEvent.isNull("image")){
-                    Log.v(LOG_TAG, "is null");
+                    //Log.v(LOG_TAG, "is null");
                     img_url = "";
                 }
                 else{
                     //Get the url for the image to be displayed
-                    img_url = currEvent.getJSONObject("image").getJSONObject("blackborder250").getString("url");
+                    img_url = currEvent.getJSONObject("image").getJSONObject("block200").getString("url");
 
                     //Next get the event date, venue, and details
                     String title = currEvent.getString("title");
@@ -229,6 +272,7 @@ public class ListEvents extends Fragment {
                     String venue = currEvent.getString("venue_name");
                     double lat = currEvent.getDouble("latitude");
                     double lng = currEvent.getDouble("longitude");
+                    String id = currEvent.getString("id");
                     String description;
                     if (currEvent.getString("description") == "null") {
                         description = "No information available.";
@@ -236,7 +280,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, description, venue, lat, lng);
+                    newEvent.setEventInfo(title, img_url, date, description, venue, lat, lng, id);
 
 
                 }
