@@ -1,53 +1,21 @@
 package com.eventapp.eventapp;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
+import android.util.Log;
 
 /**
  * Created by devin on 22/11/16.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.listings_menu, menu);
-        return true;
-    }
-
-    public void searchByDetails() {
-        String location =  findViewById(R.id.textSearchLocation).toString();
-        String category = findViewById(R.id.textSearchCategory).toString();
-        String date = findViewById(R.id.textSearchDate).toString();
-        StringBuilder url = new StringBuilder("?");
-        url.append("location=");
-        url.append(location);
-        url.append("&");
-        url.append("category=");
-        url.append(category);
-        url.append("&");
-        url.append("date=");
-        url.append(date);
-        Intent intent = new Intent(this, ListEvents.class);
-        intent.putExtra("url", url.toString());
-        startActivity(intent);
-    }
-
-    public void searchByRecommended() {
-        Intent intent = new Intent(this, ListEvents.class);
-        intent.putExtra("url", "recommended");
-        startActivity(intent);
-    }
 
 }
