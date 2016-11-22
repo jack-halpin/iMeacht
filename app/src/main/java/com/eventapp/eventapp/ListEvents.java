@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import static android.R.attr.description;
 import static com.google.android.gms.analytics.internal.zzy.j;
+import static com.google.android.gms.analytics.internal.zzy.k;
 import static com.google.android.gms.analytics.internal.zzy.l;
 import static com.google.android.gms.analytics.internal.zzy.n;
 
@@ -42,6 +43,7 @@ public class ListEvents extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         Log.e("Prefs", getPrefString());
+
 
     }
 
@@ -59,10 +61,14 @@ public class ListEvents extends Fragment {
         return pref;
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.e("onCreateView: ", "Called");
         View rootView = inflater.inflate(R.layout.activity_list_events, container, false);
 
         // Get ListView object from xml
@@ -97,8 +103,6 @@ public class ListEvents extends Fragment {
 
                                             }
         });
-        FetchEventInfo fetch = new FetchEventInfo();
-        fetch.execute("hi");
         return rootView;
     }
 
@@ -135,12 +139,20 @@ public class ListEvents extends Fragment {
     }
 
     public void getEventInfo(){
+        if (eventLists.isEmpty() == true){
+            Log.e("E", "is empty");
+        }
         //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
+        Log.e("getEventInfo:", "called");
         FetchEventInfo fetch = new FetchEventInfo();
         fetch.execute("test");
     }
 
-
+    @Override
+    public void onStart(){
+        super.onStart();
+        getEventInfo();
+    }
 
 
     //The class represents an asynchronous task to be carried out when the activity is loaded
@@ -247,7 +259,7 @@ public class ListEvents extends Fragment {
                 EventListing newEvent = new EventListing();
 
                 if (currEvent.isNull("image")){
-                    Log.v(LOG_TAG, "is null");
+                    //Log.v(LOG_TAG, "is null");
                     img_url = "";
                 }
                 else{
