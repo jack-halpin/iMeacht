@@ -31,7 +31,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                 View view = inflater.inflate(R.layout.activity_maps, container, false);
                 locations = (ArrayList<MapDetails>) getArguments().getSerializable("locations");
-                System.out.println(locations.get(1).getTitle());
                 mMapView = (MapView) view.findViewById(R.id.map_placeholder);
                 mMapView.onCreate(savedInstanceState);
 
@@ -54,9 +53,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 LatLng latlngs;
                 latlngs = new LatLng(0, 0);
                 for (MapDetails loc : locations) {
-                        System.out.println("DAVE4: " + loc.getTitle());
-                        System.out.println("DAVE5: " + loc.getLat());
-                        System.out.println("DAVE6: " + loc.getLng());
                         latlngs = new LatLng(loc.getLat(), loc.getLng());
                         mMap.addMarker(new MarkerOptions().position(latlngs)
                         .title(loc.getTitle()).snippet(loc.getSnippet()));

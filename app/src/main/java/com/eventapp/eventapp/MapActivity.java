@@ -12,7 +12,7 @@ import com.google.android.gms.maps.MapFragment;
 import java.util.ArrayList;
 
 
-public class MapActivity extends FragmentActivity {
+public class MapActivity extends AppCompatActivity {
 
     private ArrayList<MapDetails> locations;
 
