@@ -90,7 +90,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
         String id_check = E.getId();
-        List<String> eventList = db.getAllSavedEvents();
+        List<String> eventList = db.getAllSavedEventsIDS();
 
         for(String str: eventList) {
             if(str.trim().contains(id_check)) {
@@ -103,7 +103,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 return false;
                 }
             }
-        db.addEvent(id_check, E.getTitle());
+        db.addEvent(id_check, E.getTitle(), E.getDate(), E.getVenueName(), E.getDetails(), E.getImgUrl());
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";
