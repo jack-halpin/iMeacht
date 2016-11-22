@@ -31,7 +31,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                 View view = inflater.inflate(R.layout.activity_maps, container, false);
                 locations = (ArrayList<MapDetails>) getArguments().getSerializable("locations");
-                System.out.println(locations.get(1).getTitle());
                 mMapView = (MapView) view.findViewById(R.id.map_placeholder);
                 mMapView.onCreate(savedInstanceState);
 
