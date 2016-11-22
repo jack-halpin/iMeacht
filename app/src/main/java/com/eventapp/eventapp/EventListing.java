@@ -86,18 +86,6 @@ public class EventListing implements Parcelable {
         this.img = img;
     }
 
-    public Bitmap getImage(){
-        return this.img;
-    }
-
-    public void setId(String eventId){
-        this.id = eventId;
-    }
-
-    public String getId(){
-        return this.id;
-    }
-
     //Taken from http://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
     public void setBitmapFromURL(String src) {
         try {
@@ -119,6 +107,22 @@ public class EventListing implements Parcelable {
     public String getTitle(){
         return this.title;
     }
+
+    public Bitmap getImage(){
+        return this.img;
+    }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public String getImgUrl() { return this.img_url; }
+
+    public String getDate() { return this.date; }
+
+    public String getDetails() { return this.detail; }
+
+    public String getVenueName() { return this.venueName; }
 
     @Override
     public int describeContents() {

@@ -33,8 +33,17 @@ public class DetailedEventActivity extends AppCompatActivity {
         ImageView img = (ImageView) findViewById(R.id.imageViewDetailed);
         img.setImageBitmap(E.getImage());
 
-        TextView v = (TextView) findViewById(R.id.textView2);
-        v.setText(E.getTitle());
+        TextView v2 = (TextView) findViewById(R.id.textView2);
+        v2.setText(E.getTitle());
+        TextView v3 = (TextView) findViewById(R.id.textView3);
+        v3.setText(E.getDate());
+        TextView v4 = (TextView) findViewById(R.id.textView4);
+        v4.setText(E.getVenueName());
+        TextView v5 = (TextView) findViewById(R.id.textView5);
+        v5.setText(E.getDetails());
+//        TextView v6 = (TextView) findViewById(R.id.textView6);
+//        v6.setText(E.getImgUrl());
+
     }
 
     /** Called when the user clicks the Send button */
