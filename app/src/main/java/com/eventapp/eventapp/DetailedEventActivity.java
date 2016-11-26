@@ -1,9 +1,11 @@
 package com.eventapp.eventapp;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.provider.MediaStore;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
@@ -65,10 +67,6 @@ public class DetailedEventActivity extends AppCompatActivity {
 
     /** Called when the user clicks the Send button */
     public void addCalendar(View view) throws ParseException{
-        //Calendar beginTime = Calendar.getInstance();
-        //beginTime.set(2016, 10, 16, 18, 30);
-        //Calendar endTime = Calendar.getInstance();
-        //endTime.set(2016, 10, 16, 20, 30);
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, E.getStartTime().getTimeInMillis())
@@ -78,7 +76,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                 .putExtra(CalendarContract.Events.DESCRIPTION, E.getDetails())
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, E.getVenueName())
                 .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
-                //.putExtra(Intent.EXTRA_EMAIL, "patrick.harney@gmail.com, patrick.harney@ucdconnect.ie");
         startActivity(intent);
     }
 
@@ -128,14 +125,25 @@ public class DetailedEventActivity extends AppCompatActivity {
             case R.id.menu_item_share:
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                //String shareBody = "Check it out";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, E.getTitle());
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, E.getUrl());
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 return true;
+            case R.id.menu_item_play:
+                playSearchArtist();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    public void playSearchArtist() {
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+        intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS,
+                MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE);
+        intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, E.getTitle());
+        intent.putExtra(SearchManager.QUERY, E.getTitle());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 }
