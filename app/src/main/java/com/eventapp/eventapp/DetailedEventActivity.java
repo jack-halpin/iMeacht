@@ -140,10 +140,18 @@ public class DetailedEventActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
         intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS,
                 MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE);
-        intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, E.getTitle());
-        intent.putExtra(SearchManager.QUERY, E.getTitle());
+        intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, E.getArtistName());
+        intent.putExtra(SearchManager.QUERY, E.getArtistName());
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "No media apps installed!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
     }
 }

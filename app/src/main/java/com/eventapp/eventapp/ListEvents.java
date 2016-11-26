@@ -274,6 +274,7 @@ public class ListEvents extends Fragment {
                     double lng = currEvent.getDouble("longitude");
                     String id = currEvent.getString("id");
                     String url = currEvent.getString("url");
+                    String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
                     String description;
                     if (currEvent.getString("description") == "null") {
                         description = "No information available.";
@@ -281,7 +282,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, lat, lng, id, url);
+                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, lat, lng, id, url, name);
 
 
                 }

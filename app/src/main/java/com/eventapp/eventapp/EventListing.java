@@ -31,6 +31,7 @@ public class EventListing implements Parcelable {
     private String detail;
     private String venueName;
     private String url;
+    private String name;
     private int allDay;
     private double lat;
     private double lng;
@@ -52,6 +53,7 @@ public class EventListing implements Parcelable {
         lng = in.readDouble();
         allDay = in.readInt();
         url = in.readString();
+        name = in.readString();
     }
 
     public static final Creator<EventListing> CREATOR = new Creator<EventListing>() {
@@ -73,7 +75,7 @@ public class EventListing implements Parcelable {
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, double lat, double lng, String id, String url){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, double lat, double lng, String id, String url, String name){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -84,6 +86,7 @@ public class EventListing implements Parcelable {
         this.lng = lng;
         this.id = id;
         this.url = url;
+        this.name = name;
         setBitmapFromURL(img_url);
     }
 
@@ -159,6 +162,7 @@ public class EventListing implements Parcelable {
 
     public void setVenueName(String venue) { this.venueName = venue; }
 
+    public  String getArtistName() { return this.name; }
 
     @Override
     public int describeContents() {
@@ -178,5 +182,6 @@ public class EventListing implements Parcelable {
         parcel.writeDouble(lng);
         parcel.writeInt(allDay);
         parcel.writeString(url);
+        parcel.writeString(name);
     }
 }
