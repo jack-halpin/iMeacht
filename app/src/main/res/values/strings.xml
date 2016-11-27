@@ -7,4 +7,11 @@
     <string name="play">Play</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+
+    <string-array name="planets_array">
+        <item>Search</item>
+        <item>Event Map</item>
+        <item>My Events</item>
+        <item>About</item>
+    </string-array>
 </resources>

@@ -63,6 +63,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 //        TextView v6 = (TextView) findViewById(R.id.textView6);
 //        v6.setText(E.getImgUrl());
 
+
     }
 
     /** Called when the user clicks the Send button */
