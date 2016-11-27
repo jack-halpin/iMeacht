@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -84,6 +85,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                                 }
                         }
                 );
+                LatLng latlngs = new LatLng(locations.get(0).getLat(), locations.get(0).getLng());
+                CameraUpdate loc = CameraUpdateFactory.newLatLngZoom(latlngs, 13);
+                mMap.animateCamera(loc);
         }
 
         public class findDetails extends AsyncTask<Void, EventListing, Boolean> {
