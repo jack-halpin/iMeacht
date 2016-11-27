@@ -16,12 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            >
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            </intent-filter>
         </activity>
         <activity android:name=".DetailedEventActivity" />
         <activity android:name=".SearchActivity" />
@@ -38,6 +35,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <!--
  ATTENTION: This intent was auto-generated. Follow instructions at
   https://g.co/AppIndexing/AndroidStudio to publish your URLs.
