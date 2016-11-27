@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+
     >
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/entry_text"
+        android:id="@+id/event_thumb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -17,24 +19,37 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_weight="0.7"
         android:paddingLeft="16dp"
 
         android:orientation="vertical">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/event_title"
+        android:id="@+id/event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/colorAccent"
+        />
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+
+            android:textColor="#000000"
+            />
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/event_description"
+            android:id="@+id/event_venue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+
+
+            android:textColor="#000000"
             />
+
     </LinearLayout>
 
 

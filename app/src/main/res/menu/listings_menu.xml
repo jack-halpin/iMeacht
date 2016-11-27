@@ -8,9 +8,6 @@
     <item android:id="@+id/map_view"
         android:title="Map"
         app:showAsAction="never"/>
-    <item android:id="@+id/settings"
-        android:title="Settings"
-        app:showAsAction="never"/>
     <item android:id="@+id/saved_events"
         android:title="Saved Events"
         app:showAsAction="never"/>

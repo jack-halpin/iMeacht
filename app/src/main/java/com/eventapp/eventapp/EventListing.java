@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import static android.R.attr.name;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Jack on 07/11/2016.
@@ -27,8 +28,15 @@ public class EventListing implements Parcelable {
     private Bitmap img;
     private String id;
     private String date;
+    private String dayOfWeek;
+    private String month;
+    private String dayOfMonth;
     private String detail;
     private String venueName;
+    private String url;
+    private String name;
+    private String venueAddress;
+    private int allDay;
     private double lat;
     private double lng;
 
@@ -47,6 +55,9 @@ public class EventListing implements Parcelable {
         venueName = in.readString();
         lat = in.readDouble();
         lng = in.readDouble();
+        allDay = in.readInt();
+        url = in.readString();
+        name = in.readString();
     }
 
     public static final Creator<EventListing> CREATOR = new Creator<EventListing>() {
@@ -69,18 +80,25 @@ public class EventListing implements Parcelable {
         return this.detail;
     }
 
-    public void setEventInfo(String title, String img_url, String date, String detail, String venue, double lat, double lng, String id){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String name){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
+        this.allDay = allDay;
         this.detail = detail;
         this.venueName = venue;
         this.lat = lat;
         this.lng = lng;
         this.id = id;
+        this.url = url;
+        this.name = name;
+        this.venueAddress = VenueAdd;
         setBitmapFromURL(img_url);
     }
 
+    public String getVenueAddress(){
+        return this.venueAddress;
+    }
     public EventListing(String title){
         this.title = title;
     }
@@ -107,6 +125,11 @@ public class EventListing implements Parcelable {
         }
     }
 
+    public void setDateParams(){
+        
+    }
+
+
     public String getTitle(){
         return this.title;
     }
@@ -127,6 +150,16 @@ public class EventListing implements Parcelable {
 
     public String getImgUrl() { return this.img_url; }
 
+    public boolean getAllDay(){
+        return (this.allDay > 0);
+    }
+
+    public Calendar getStartTime() throws ParseException{
+        Calendar startTime = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime.setTime(sdf.parse(this.date));
+        return startTime;
+    }
     public void setImgUrl(String img_url) { this.img_url = img_url; }
 
     public String getDate() { return this.date; }
@@ -139,12 +172,15 @@ public class EventListing implements Parcelable {
 
     public String getVenueName() { return this.venueName; }
 
+    public String getUrl() { return this.url; }
+
     public void setVenueName(String venue) { this.venueName = venue; }
 
     public Double getLat() { return this.lat; }
 
     public Double getLng() { return this.lng; }
 
+    public  String getArtistName() { return this.name; }
 
     @Override
     public int describeContents() {
@@ -162,5 +198,8 @@ public class EventListing implements Parcelable {
         parcel.writeString(venueName);
         parcel.writeDouble(lat);
         parcel.writeDouble(lng);
+        parcel.writeInt(allDay);
+        parcel.writeString(url);
+        parcel.writeString(name);
     }
 }

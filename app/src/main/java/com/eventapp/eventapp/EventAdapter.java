@@ -1,7 +1,6 @@
 package com.eventapp.eventapp;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-
-import static com.google.android.gms.analytics.internal.zzy.e;
 
 /**
  * Created by Jack on 07/11/2016.
@@ -38,28 +35,21 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
         EventListing event = getItem(position);
 
         if (event != null) {
-            ImageView leftTextView = (ImageView) view.findViewById(R.id.entry_text);
-            TextView rightTextView = (TextView) view.findViewById(R.id.event_title);
-            TextView desc = (TextView) view.findViewById(R.id.event_description);
+            ImageView eventThumbnail = (ImageView) view.findViewById(R.id.event_thumb);
+            TextView eventTitle = (TextView) view.findViewById(R.id.event_title);
+            TextView eventDate = (TextView) view.findViewById(R.id.event_date);
+            TextView eventVenue = (TextView) view.findViewById(R.id.event_venue);
 
 
-            if (leftTextView != null) {
-                leftTextView.setImageBitmap(event.getImage());
+
+            if (eventThumbnail != null) {
+                eventThumbnail.setImageBitmap(event.getImage());
             }
 
-            if (rightTextView != null) {
-                rightTextView.setText(event.getTitle());
-
-                //Format description. If the description is too long to display
-                //We need to get the first portion of it.
-
-                if (event.getDescription().length() > 100){
-                    String subDesc = event.getDescription().substring(0,100) + "...";
-                    desc.setText(subDesc);
-                }
-                else {
-                    desc.setText(event.getDescription());
-                }
+            if (eventTitle != null) {
+                eventTitle.setText(event.getTitle());
+                eventDate.setText(event.getDate());
+                eventVenue.setText(event.getVenueName());
             }
         }
 

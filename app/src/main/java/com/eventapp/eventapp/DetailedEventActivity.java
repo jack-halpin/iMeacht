@@ -1,10 +1,11 @@
 package com.eventapp.eventapp;
 
-import android.content.ContentValues;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.provider.MediaStore;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
@@ -16,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DetailedEventActivity extends AppCompatActivity {
@@ -62,24 +63,20 @@ public class DetailedEventActivity extends AppCompatActivity {
 //        TextView v6 = (TextView) findViewById(R.id.textView6);
 //        v6.setText(E.getImgUrl());
 
+
     }
 
     /** Called when the user clicks the Send button */
-    public void addCalendar(View view) {
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2016, 10, 16, 18, 30);
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(2016, 10, 16, 20, 30);
+    public void addCalendar(View view) throws ParseException{
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, "Android Swotting")
-                .putExtra(CalendarContract.Events.DESCRIPTION, "This is when I sit around trying to" +
-                        "code in Android")
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, "Boardroom Science Building")
-                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                .putExtra(Intent.EXTRA_EMAIL, "patrick.harney@gmail.com, patrick.harney@ucdconnect.ie");
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, E.getStartTime().getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, (E.getStartTime().getTimeInMillis() + (2*60*60*1000)))
+                .putExtra(CalendarContract.Events.ALL_DAY, E.getAllDay())
+                .putExtra(CalendarContract.Events.TITLE, E.getTitle())
+                .putExtra(CalendarContract.Events.DESCRIPTION, E.getDetails())
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, E.getVenueName())
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
         startActivity(intent);
     }
 
@@ -129,14 +126,33 @@ public class DetailedEventActivity extends AppCompatActivity {
             case R.id.menu_item_share:
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBody = "Check it out";
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, E.getTitle());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, E.getUrl());
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 return true;
+            case R.id.menu_item_play:
+                playSearchArtist();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    public void playSearchArtist() {
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+        intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS,
+                MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE);
+        intent.putExtra(MediaStore.EXTRA_MEDIA_ARTIST, E.getArtistName());
+        intent.putExtra(SearchManager.QUERY, E.getArtistName());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "No media apps installed!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    }
 }
