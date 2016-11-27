@@ -4,10 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 
-/**
- * Created by devin on 22/11/16.
- */
-
 public class ListEventsActivity extends AppCompatActivity {
 
     @Override
