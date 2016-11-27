@@ -28,7 +28,8 @@
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <activity android:name=".MapActivity" />
+        <activity android:name=".MapActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

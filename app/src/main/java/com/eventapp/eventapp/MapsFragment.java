@@ -1,13 +1,18 @@
 package com.eventapp.eventapp;
 
 import android.animation.LayoutTransition;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,14 +23,30 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         private GoogleMap mMap;
         private MapView mMapView;
         private ArrayList<MapDetails> locations;
+        private ArrayList<EventListing> eventLocations;
+        private Map<String, EventListing> markerMap;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +60,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                 mMapView.getMapAsync(this);
 
-
-
                 return view;
         }
 
@@ -50,14 +69,63 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         mMap.setMyLocationEnabled(true);
                 }
-                LatLng latlngs;
-                latlngs = new LatLng(0, 0);
-                for (MapDetails loc : locations) {
-                        latlngs = new LatLng(loc.getLat(), loc.getLng());
-                        mMap.addMarker(new MarkerOptions().position(latlngs)
-                        .title(loc.getTitle()).snippet(loc.getSnippet()));
-                }
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(latlngs).zoom(12).build();
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                markerMap = new HashMap<>();
+                findDetails find = new findDetails(mMap, markerMap);
+                find.execute();
+                mMap.setOnInfoWindowClickListener(
+                        new GoogleMap.OnInfoWindowClickListener() {
+                                @Override
+                                public void onInfoWindowClick(Marker marker) {
+                                        String markerTitle = marker.getTitle();
+                                        EventListing event = markerMap.get(markerTitle);
+                                        Intent intent = new Intent(getActivity(), DetailedEventActivity.class);
+                                        intent.putExtra("EVENT_OBJ", event);
+                                        startActivity(intent);
+                                }
+                        }
+                );
         }
+
+        public class findDetails extends AsyncTask<Void, EventListing, Boolean> {
+
+                private final GoogleMap gMap;
+                private Map<String, EventListing> markerMap;
+
+                public findDetails(GoogleMap gmap, Map<String, EventListing> mMap) {
+                        this.gMap = gmap;
+                        this.markerMap = mMap;
+                }
+
+                private void drawMarker(GoogleMap gmap, EventListing event) {
+                        LatLng latlngs = new LatLng(event.getLat(), event.getLng());
+                        MarkerOptions markOp = new MarkerOptions();
+                        markOp.position(latlngs)
+                                .title(event.getTitle())
+                                .snippet(event.getDate());
+
+                        gmap.addMarker(markOp);
+                        markerMap.put(event.getTitle(), event);
+
+                }
+
+                @Override
+                protected Boolean doInBackground(Void... params) {
+
+                        for (MapDetails loc : locations) {
+                                EventListing event = new EventListing();
+                                event.setEventInfo(loc.getTitle(), loc.getImg_url(), loc.getDate(), loc.getSnippet(), loc.getVenue(), loc.getLat(), loc.getLng(), loc.getId());
+                                publishProgress(event);
+                        }
+
+                        return true;
+                }
+
+                @Override
+                protected void onProgressUpdate(EventListing... event) {
+                        drawMarker(this.gMap, event[0]);
+                }
+
+        }
+
+
 }

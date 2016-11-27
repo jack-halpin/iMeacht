@@ -17,6 +17,8 @@ import static android.R.attr.name;
  * Created by Jack on 07/11/2016.
  */
 
+import android.content.Context;
+
 public class EventListing implements Parcelable {
     //A really simple class for holding information related to an event that has been read in from
     //eventful API
@@ -60,7 +62,7 @@ public class EventListing implements Parcelable {
     };
 
     public MapDetails returnMapDetails(){
-        return new MapDetails(this.title, this.detail, this.lng, this.lat);
+        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id);
     }
     
     public String getDescription(){
@@ -138,6 +140,10 @@ public class EventListing implements Parcelable {
     public String getVenueName() { return this.venueName; }
 
     public void setVenueName(String venue) { this.venueName = venue; }
+
+    public Double getLat() { return this.lat; }
+
+    public Double getLng() { return this.lng; }
 
 
     @Override
