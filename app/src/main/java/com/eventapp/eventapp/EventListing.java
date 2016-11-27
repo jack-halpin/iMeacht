@@ -14,8 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static android.R.attr.name;
-
 /**
  * Created by Jack on 07/11/2016.
  */
@@ -28,10 +26,14 @@ public class EventListing implements Parcelable {
     private Bitmap img;
     private String id;
     private String date;
+    private String dayOfWeek;
+    private String month;
+    private String dayOfMonth;
     private String detail;
     private String venueName;
     private String url;
     private String name;
+    private String venueAddress;
     private int allDay;
     private double lat;
     private double lng;
@@ -75,7 +77,8 @@ public class EventListing implements Parcelable {
     public String getDescription(){
         return this.detail;
     }
-    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, double lat, double lng, String id, String url, String name){
+
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String name){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -87,9 +90,13 @@ public class EventListing implements Parcelable {
         this.id = id;
         this.url = url;
         this.name = name;
+        this.venueAddress = VenueAdd;
         setBitmapFromURL(img_url);
     }
 
+    public String getVenueAddress(){
+        return this.venueAddress;
+    }
     public EventListing(String title){
         this.title = title;
     }
@@ -115,6 +122,11 @@ public class EventListing implements Parcelable {
             Log.e("Exception",e.getMessage());
         }
     }
+
+    public void setDateParams(){
+        
+    }
+
 
     public String getTitle(){
         return this.title;

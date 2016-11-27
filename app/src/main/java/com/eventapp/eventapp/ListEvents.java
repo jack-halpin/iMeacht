@@ -27,11 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.google.android.gms.analytics.internal.zzy.j;
-import static com.google.android.gms.analytics.internal.zzy.k;
-import static com.google.android.gms.analytics.internal.zzy.l;
-import static com.google.android.gms.analytics.internal.zzy.n;
-
 public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
@@ -274,6 +269,7 @@ public class ListEvents extends Fragment {
                     double lng = currEvent.getDouble("longitude");
                     String id = currEvent.getString("id");
                     String url = currEvent.getString("url");
+                    String venueAdd = currEvent.getString("venue_address");
                     String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
                     String description;
                     if (currEvent.getString("description") == "null") {
@@ -282,7 +278,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, lat, lng, id, url, name);
+                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, name);
 
 
                 }
