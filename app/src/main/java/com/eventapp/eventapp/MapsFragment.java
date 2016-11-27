@@ -113,7 +113,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                         for (MapDetails loc : locations) {
                                 EventListing event = new EventListing();
-                                event.setEventInfo(loc.getTitle(), loc.getImg_url(), loc.getDate(), loc.getSnippet(), loc.getVenue(), loc.getLat(), loc.getLng(), loc.getId());
+                                event.setEventInfo(loc.getTitle(), loc.getImg_url(), loc.getDate(), loc.getAllDay(), loc.getSnippet(), loc.getVenue(), loc.getVenueAdd(), loc.getLat(), loc.getLng(), loc.getId(), loc.getUrl(), loc.getName());
                                 publishProgress(event);
                         }
 

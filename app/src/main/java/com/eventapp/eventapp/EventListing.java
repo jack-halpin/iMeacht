@@ -73,7 +73,7 @@ public class EventListing implements Parcelable {
     };
 
     public MapDetails returnMapDetails(){
-        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id);
+        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.name, this.url);
     }
     
     public String getDescription(){
