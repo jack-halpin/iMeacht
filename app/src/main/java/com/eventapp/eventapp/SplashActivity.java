@@ -14,13 +14,14 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if (pref.getBoolean("firstTimeBoot", true)) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("firstTime", true);
             startActivity(intent);
-            System.out.println("DAVE");
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("firstTimeBoot", false);
             editor.apply();
         } else {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("firstTime", false);
             startActivity(intent);
         }
         finish();
