@@ -18,8 +18,6 @@ import java.util.Calendar;
  * Created by Jack on 07/11/2016.
  */
 
-import android.content.Context;
-
 public class EventListing implements Parcelable {
     //A really simple class for holding information related to an event that has been read in from
     //eventful API
@@ -28,9 +26,10 @@ public class EventListing implements Parcelable {
     private Bitmap img;
     private String id;
     private String date;
-    private String dayOfWeek;
-    private String month;
-    private String dayOfMonth;
+    private Calendar eventDate;
+    private int dayOfWeek;
+    private int month;
+    private int dayOfMonth;
     private String detail;
     private String venueName;
     private String url;
@@ -58,7 +57,38 @@ public class EventListing implements Parcelable {
         allDay = in.readInt();
         url = in.readString();
         name = in.readString();
+        setDateObject();
     }
+
+    public String getDay(){
+        switch(this.dayOfWeek){
+            case 1: return "Sunday";
+            case 2: return "Monday";
+            case 3: return "Tuesday";
+            case 4: return "Wednesday";
+            case 5: return "Thursday";
+            case 6: return "Friday";
+            case 7: return "Saturday";
+            default: return "Undefined";
+        }
+    }
+    public void setDateObject() {
+        this.eventDate = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            this.eventDate.setTime(sdf.parse(this.date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.e("date", this.date);
+
+        this.dayOfWeek = this.eventDate.get(Calendar.DAY_OF_WEEK);
+        this.month = this.eventDate.get(Calendar.MONTH);
+        this.dayOfMonth = this.eventDate.get(Calendar.DAY_OF_MONTH);
+        Log.e("num", Integer.toString(this.dayOfWeek));
+    }
+
+
 
     public static final Creator<EventListing> CREATOR = new Creator<EventListing>() {
         @Override
@@ -75,7 +105,7 @@ public class EventListing implements Parcelable {
     public MapDetails returnMapDetails(){
         return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.name, this.url);
     }
-    
+
     public String getDescription(){
         return this.detail;
     }
@@ -126,7 +156,7 @@ public class EventListing implements Parcelable {
     }
 
     public void setDateParams(){
-        
+
     }
 
 
@@ -154,11 +184,9 @@ public class EventListing implements Parcelable {
         return (this.allDay > 0);
     }
 
+
     public Calendar getStartTime() throws ParseException{
-        Calendar startTime = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        startTime.setTime(sdf.parse(this.date));
-        return startTime;
+        return this.eventDate;
     }
     public void setImgUrl(String img_url) { this.img_url = img_url; }
 
