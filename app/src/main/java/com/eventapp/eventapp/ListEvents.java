@@ -27,20 +27,28 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.google.android.gms.analytics.internal.zzy.f;
+import static com.google.android.gms.analytics.internal.zzy.p;
+
 public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
     private EventAdapter eventLists;
-
+    private FetchEventInfo fetch;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        fetch = new FetchEventInfo();
         Log.e("Prefs", getPrefString());
 
 
-    }
 
+    }
+@Override public void onResume(){
+    super.onResume();
+    fetch = new FetchEventInfo();
+}
     public String getPrefString() {
         SharedPreferences sharedPref = this.getActivity().getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
         int size = sharedPref.getAll().size();
@@ -135,15 +143,20 @@ public class ListEvents extends Fragment {
     public void getEventInfo(){
         if (eventLists.isEmpty() == true){
             Log.e("E", "is empty");
+            fetch = new FetchEventInfo();
+            fetch.execute("test");
         }
         //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
         Log.e("getEventInfo:", "called");
-        FetchEventInfo fetch = new FetchEventInfo();
-        fetch.execute("test");
+
     }
 
+    public EventAdapter getEventLists(){
+        return this.eventLists;
+    }
     @Override
     public void onStart(){
+        Log.e("onStart", "called");
         super.onStart();
         getEventInfo();
     }
