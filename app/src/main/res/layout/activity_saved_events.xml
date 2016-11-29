@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context="com.eventapp.eventapp.SavedEventsActivity">
+    tools:context="com.eventapp.eventapp.SavedEventsActivity"
+    android:weightSum="1">
 
 
     <fragment
@@ -16,18 +17,20 @@
         android:name="com.eventapp.eventapp.ListEventsFromDB"
         tools:layout="@layout/activity_list_events"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="237dp"
         android:background="#ffffff"
-        />
+        android:layout_weight="0.95" />
 
     <Button
         android:text="Delete Events"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
         android:id="@+id/button_delete_events"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:onClick="deleteSavedEvents" />
+        android:gravity="center"
+        android:onClick="deleteSavedEvents"
+        android:layout_weight="0.10" />
 
 </LinearLayout>
