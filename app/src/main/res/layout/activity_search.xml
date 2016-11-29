@@ -5,82 +5,59 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp"
-    android:paddingTop="40dp"
-    android:background="#000000"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="12dp"
+    android:background="#FFFFFF"
     tools:context="com.eventapp.eventapp.MainActivity"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="40dp"
-        android:background="#0F5CC2">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:text="Search"
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Category:"
+                android:textStyle="bold"
+                android:paddingLeft="8dp"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:paddingBottom="4dp"
+                />
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="12dp"
+                />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Date:"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            android:textSize="16dp"
+            android:textColor="@color/colorAccent"
+            android:paddingBottom="4dp"
+            />
+        <DatePicker
+            android:id="@+id/date_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:id="@+id/searchButton"
-            android:onClick="searchByDetails"/>
+            />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:inputType="text"
-            android:gravity="center_horizontal"
-            android:ems="10"
-            android:id="@+id/textSearchCategory"
-            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:layout_below="@+id/textSearchDate"
-            android:layout_alignLeft="@+id/textSearchDate"
-            android:layout_alignStart="@+id/textSearchDate"
-            android:layout_marginTop="40dp"
-            android:text="Category" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:inputType="text"
-            android:text="Location"
-            android:gravity="center_horizontal"
-            android:ems="10"
-            android:id="@+id/textSearchLocation"
-            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:layout_marginTop="40dp"
-            android:layout_below="@+id/searchButton"
-            android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:inputType="date"
-            android:text="Date"
-            android:gravity="center_horizontal"
-            android:ems="10"
-            android:id="@+id/textSearchDate"
-            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:layout_marginTop="40dp"
-            android:layout_below="@+id/textSearchLocation"
-            android:layout_alignLeft="@+id/textSearchLocation"
-            android:layout_alignStart="@+id/textSearchLocation" />
 
-    </RelativeLayout>
 
-    <Button
-        android:text="Recommended"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recommendedButton"
-        android:layout_marginBottom="63dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="searchByRecommended"/>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
