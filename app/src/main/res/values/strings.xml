@@ -37,4 +37,22 @@
         <item>The calendar icon on the action bar will add the event to your default Calendar application</item>
 
     </string-array>
+
+    <string-array name="preferences_array">
+        <item>Music</item>
+        <item>Books</item>
+        <item>Art</item>
+        <item>Culinary</item>
+        <item>Sport</item>
+        <item>Festivals</item>
+    </string-array>
+
+    <string-array name="preferences_values">
+        <item>Music</item>
+        <item>Books</item>
+        <item>Art</item>
+        <item>Culinary</item>
+        <item>Sport</item>
+        <item>Festivals</item>
+    </string-array>
 </resources>
