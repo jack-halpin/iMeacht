@@ -17,24 +17,36 @@ import java.util.List;
 
 public class EventDbOpenHelper extends SQLiteOpenHelper {
 
-    final static String TABLE_NAME = "saved_events";
     final static String ACT_ID = "id";
-    final static String ACT_NAME = "name";
+    final static String TABLE_NAME = "saved_events";
+    final static String ACT_TITLE = "title";
+    final static String ACT_IMG_URL = "img_url";
     final static String ACT_DATE = "date";
-    final static String ACT_VENUE = "venue";
     final static String ACT_DETAILS = "details";
+    final static String ACT_VENUE = "venue";
     final static String ACT_URL = "url";
-    final static String [] columns = { ACT_ID, ACT_NAME, ACT_DATE, ACT_VENUE, ACT_DETAILS, ACT_URL };
+    final static String ACT_NAME = "act_name";
+    final static String VENUE_ADDRESS = "venue_address";
+    final static String ALL_DAY = "all_day";
+    final static String LAT = "lat";
+    final static String LNG = "lng";
+    final static String [] columns = { ACT_TITLE, ACT_IMG_URL, ACT_ID, ACT_DATE, ACT_DETAILS, ACT_VENUE, ACT_URL, ACT_NAME, VENUE_ADDRESS, ALL_DAY, LAT, LNG };
 
     final private static String CREATE_CMD =
 
-        "CREATE TABLE saved_events (" + ACT_ID
-            + " TEXT NOT NULL, "
+        "CREATE TABLE saved_events ("
+            + ACT_ID + " TEXT NOT NULL, "
+            + ACT_TITLE + " TEXT NOT NULL, "
+            + ACT_IMG_URL + " TEXT, "
+            + ACT_DATE + " TEXT, "
+            + ACT_DETAILS + " TEXT, "
+            + ACT_VENUE + " TEXT, "
+            + ACT_URL + " TEXT NOT NULL, "
             + ACT_NAME + " TEXT NOT NULL, "
-            + ACT_DATE + " TEXT NOT NULL, "
-            + ACT_VENUE + " TEXT NOT NULL, "
-            + ACT_DETAILS + " TEXT NOT NULL, "
-            + ACT_URL + " TEXT NOT NULL)";
+            + VENUE_ADDRESS + " TEXT, "
+            + ALL_DAY + " TEXT, "
+            + LAT + " TEXT, "
+            + LNG + " TEXT)";
 
     final private static String NAME = "event_db";
     final private static Integer VERSION = 1;
@@ -57,17 +69,23 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addEvent(String id, String name, String date, String venue, String details, String url) {
+    public void addEvent(String id, String title, String img_url, String date, String details, String venue, String url, String name, String venue_address, boolean all_day, Double lat, Double lng) {
         Log.e("addEventID", id);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues value = new ContentValues();
         value.put(ACT_ID, id);
-        value.put(ACT_NAME, name);
+        value.put(ACT_TITLE, title);
+        value.put(ACT_IMG_URL, img_url);
         value.put(ACT_DATE, date);
-        value.put(ACT_VENUE, venue);
         value.put(ACT_DETAILS, details);
+        value.put(ACT_VENUE, venue);
         value.put(ACT_URL, url);
+        value.put(ACT_NAME, name);
+        value.put(VENUE_ADDRESS, venue_address);
+        value.put(ALL_DAY, all_day);
+        value.put(LAT, lat);
+        value.put(LNG, lng);
 
         db.insert(TABLE_NAME, null, value);
 

@@ -34,12 +34,11 @@ public class EventListing implements Parcelable {
     private String detail;
     private String venueName;
     private String url;
-    private String name;
+    private String nameOfArtist;
     private String venueAddress;
     private int allDay;
     private double lat;
     private double lng;
-
 
     public EventListing(){
 
@@ -58,8 +57,13 @@ public class EventListing implements Parcelable {
         lng = in.readDouble();
         allDay = in.readInt();
         url = in.readString();
+<<<<<<< Updated upstream
         name = in.readString();
 
+=======
+        nameOfArtist = in.readString();
+        setDateObject();
+>>>>>>> Stashed changes
     }
 
     public String getDay(){
@@ -130,14 +134,14 @@ public class EventListing implements Parcelable {
     };
 
     public MapDetails returnMapDetails(){
-        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.name, this.url);
+        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url);
     }
 
     public String getDescription(){
         return this.detail;
     }
 
-    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String name){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String nameOfArtist){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -149,7 +153,7 @@ public class EventListing implements Parcelable {
         this.lng = lng;
         this.id = id;
         this.url = url;
-        this.name = name;
+        this.nameOfArtist = nameOfArtist;
         this.venueAddress = VenueAdd;
         setBitmapFromURL(img_url);
 
@@ -237,7 +241,7 @@ public class EventListing implements Parcelable {
 
     public Double getLng() { return this.lng; }
 
-    public  String getArtistName() { return this.name; }
+    public  String getArtistName() { return this.nameOfArtist; }
 
     @Override
     public int describeContents() {
@@ -257,6 +261,6 @@ public class EventListing implements Parcelable {
         parcel.writeDouble(lng);
         parcel.writeInt(allDay);
         parcel.writeString(url);
-        parcel.writeString(name);
+        parcel.writeString(nameOfArtist);
     }
 }
