@@ -85,7 +85,7 @@ public class DetailedEventActivity extends AppCompatActivity {
         }
 
 
-        Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
+//        Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
 
 
     }

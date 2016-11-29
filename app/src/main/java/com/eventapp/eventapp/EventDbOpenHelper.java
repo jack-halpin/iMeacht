@@ -147,5 +147,5 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         return savedEventIDS;
     }
 
-    void deleteDatabase() { mContext.deleteDatabase(NAME); }
+    public void deleteDatabase() { mContext.deleteDatabase(NAME); }
 }
