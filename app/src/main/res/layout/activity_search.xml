@@ -40,7 +40,7 @@
         <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Date:"
+        android:text="Location:"
         android:textStyle="bold"
         android:paddingLeft="8dp"
         android:textSize="16dp"
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter Location"
             android:id="@+id/location_editText"/>
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

@@ -160,9 +160,7 @@ public class ListEvents extends Fragment {
             // Log.d("ListEvents", "Testing log message! First parameter listed is: " + params[0].toString());
 
             // If there's no zip code, there's nothing to look up.  Verify size of params.
-            if (params.length == 0) {
-                return null;
-            }
+
 
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
@@ -176,16 +174,21 @@ public class ListEvents extends Fragment {
 
 
             try {
-
+                String base_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD";
+                String final_url;
                 //Querying test URL:
-
-                // Original URL
-                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
-
+                if (getActivity().getIntent().hasExtra("url")) {
+                    final_url = base_url + getActivity().getIntent().getStringExtra("url");
+                    Log.e("URL", final_url);
+                } else {
+                    // Original URL
+                    final_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
+                }
+                Log.e("URL", final_url);
 //                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin" + prefString.getPrefString();
 
 
-                Uri builtUri = Uri.parse(testurl);
+                Uri builtUri = Uri.parse(final_url);
 
                 URL url = new URL(builtUri.toString());
 

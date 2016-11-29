@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by devin on 22/11/16.
@@ -41,7 +43,12 @@ public class SearchActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                searchByDetails():
+                if (findViewById(R.id.location_editText).toString().equals("")){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please enter a location.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    searchByDetails();
+                }
             }
         });
     }
@@ -54,18 +61,24 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void searchByDetails() {
-        String location =  findViewById(R.id.textSearchLocation).toString();
-        String category = findViewById(R.id.textSearchCategory).toString();
-        String date = findViewById(R.id.textSearchDate).toString();
-        StringBuilder url = new StringBuilder("?");
+        EditText medit = (EditText)findViewById(R.id.location_editText);
+        String location =  medit.getText().toString();
+        Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
+        String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+        Spinner spinner1 = (Spinner) findViewById(R.id.sortby_spinner);
+        String sortby = spinner1.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+
+        StringBuilder url = new StringBuilder("&");
+
         url.append("location=");
         url.append(location);
         url.append("&");
         url.append("category=");
         url.append(category);
         url.append("&");
-        url.append("date=");
-        url.append(date);
+        url.append("sort_order=");
+        url.append(sortby);
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("url", url.toString());
         startActivity(intent);
