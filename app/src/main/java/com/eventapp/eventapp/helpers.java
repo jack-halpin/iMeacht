@@ -1,5 +1,10 @@
 package com.eventapp.eventapp;
 
+import android.app.Application;
+import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -11,7 +16,9 @@ import android.widget.TextView;
 
 public class helpers {
 
-    public static void tutorial(final String[] tutStringArray, final RelativeLayout tutorialLayout, final TextView tutorialText) {
+    public static void tutorial(final String[] tutStringArray, final RelativeLayout tutorialLayout, final TextView tutorialText, final Context context) {
+
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         // Fetch tutorial layout and make it visible
         if (tutStringArray.length > 0) {
             tutorialLayout.setVisibility(View.VISIBLE);
@@ -42,6 +49,13 @@ public class helpers {
                             tutorialLayout.setVisibility(View.INVISIBLE);
                             // Set clickable to false so clicks can pass through again.
                             tutorialLayout.setClickable(false);
+                            if (pref.getBoolean("firstTimeBoot", true)) {
+                                Intent intent = new Intent(context, EventPreferencesActivity.class);
+                                context.startActivity(intent);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("firstTimeBoot", false);
+                                editor.apply();
+                            }
                         }
                     }
                 }

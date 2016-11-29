@@ -78,7 +78,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 //        v6.setText(E.getImgUrl());
 
         if (pref.getBoolean("firstTimeEvent", true)) {
-            helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText);
+            helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText, this);
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("firstTimeEvent", false);
             editor.apply();

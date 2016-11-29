@@ -26,6 +26,7 @@
     <string-array name="tutorial_array">
         <item>Welcome to Event App</item>
         <item>On the this screen, you will see the results of a search</item>
+        <item>In order to customise your searched, you will be brought to the preferences section</item>
     </string-array>
 
     <string-array name="event_tutorial_array">
