@@ -57,13 +57,7 @@ public class EventListing implements Parcelable {
         lng = in.readDouble();
         allDay = in.readInt();
         url = in.readString();
-<<<<<<< Updated upstream
-        name = in.readString();
-
-=======
         nameOfArtist = in.readString();
-        setDateObject();
->>>>>>> Stashed changes
     }
 
     public String getDay(){
