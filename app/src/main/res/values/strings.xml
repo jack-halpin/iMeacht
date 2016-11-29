@@ -9,6 +9,7 @@
     <string name="drawer_close">Close</string>
     <string name="calendar">Calendar</string>
     <string name="addevent">Add an event</string>
+    <string name="pref_persistant_storage">presistant_key</string>
 
     <string-array name="planets_array">
         <item>Search</item>

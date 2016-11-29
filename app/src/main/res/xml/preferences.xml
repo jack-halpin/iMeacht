@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <MultiSelectListPreference
+        android:key="@string/pref_persistant_storage"
         android:title="Preferences"
         android:summary="The preference set here will be used to modify our recommender system to allow us to improve our service"
         android:entries="@array/preferences_array"
