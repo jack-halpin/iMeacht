@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/get_info"
-        android:title="Update"
-        app:showAsAction="never"/>
-    <item android:id="@+id/map_view"
-        android:title="Map"
-        app:showAsAction="never"/>
-    <item android:id="@+id/saved_events"
-        android:title="Saved Events"
+        android:title="Refresh"
         app:showAsAction="never"/>
     <item android:id="@+id/Preferences"
         android:title="Preferences"

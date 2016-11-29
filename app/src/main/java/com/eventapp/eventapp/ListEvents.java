@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.R.attr.id;
 import static com.google.android.gms.analytics.internal.zzy.f;
 import static com.google.android.gms.analytics.internal.zzy.p;
 
@@ -41,9 +42,6 @@ public class ListEvents extends Fragment {
         setHasOptionsMenu(true);
         fetch = new FetchEventInfo();
         Log.e("Prefs", getPrefString());
-
-
-
     }
 @Override public void onResume(){
     super.onResume();
@@ -115,25 +113,11 @@ public class ListEvents extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.get_info){
-
             getEventInfo();
             return true;
-        } else if (id == R.id.map_view){
-            ArrayList<MapDetails> locations = new ArrayList();
-            for (int i = 0; i < eventLists.getCount(); i++){
-                locations.add(eventLists.getItem(i).returnMapDetails());
-            }
-            Context context = getActivity();
-            Intent intent = new Intent(getActivity(), MapActivity.class);
-            intent.putExtra("locations", locations);
-            startActivity(intent);
         } else if(id == R.id.Preferences){
             Intent intent = new Intent(getActivity(), Preferences.class);
             startActivity(intent);
-        } else if(id == R.id.saved_events){
-            Intent intent = new Intent(getActivity(), SavedEventsActivity.class);
-            startActivity(intent);
-            return true;
         }
         Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
@@ -334,6 +318,8 @@ public class ListEvents extends Fragment {
                     eventLists.add(results[i]);
                 }
                 //Log.e(LOG_TAG, "First Item: " + eventLists.getItem(0));
+
+                ((MainActivity)getActivity()).setCurrEvents(eventLists);
             }
 
         }
