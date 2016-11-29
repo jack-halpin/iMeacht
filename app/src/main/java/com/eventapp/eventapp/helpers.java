@@ -28,7 +28,7 @@ public class helpers {
                 @Override
                 public void onClick(View v) {
                     // Check if the elapsed system time minus the last click is greater than 1000ms
-                    if (SystemClock.elapsedRealtime() - lastClickTime > 1000) {
+                    if (SystemClock.elapsedRealtime() - lastClickTime > 500) {
                         // If it is, reassign the lastClickTime
                         lastClickTime = SystemClock.elapsedRealtime();
                         // If the count is less than the length fo the array, set the text to count index of array
