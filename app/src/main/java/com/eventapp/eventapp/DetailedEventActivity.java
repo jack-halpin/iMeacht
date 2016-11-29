@@ -3,11 +3,7 @@ package com.eventapp.eventapp;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< Updated upstream
 import android.content.SharedPreferences;
-=======
-import android.graphics.Bitmap;
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
@@ -81,7 +77,6 @@ public class DetailedEventActivity extends AppCompatActivity {
 //        TextView v6 = (TextView) findViewById(R.id.textView6);
 //        v6.setText(E.getImgUrl());
 
-<<<<<<< Updated upstream
         if (pref.getBoolean("firstTimeEvent", true)) {
             helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText);
             SharedPreferences.Editor editor = pref.edit();
@@ -89,9 +84,9 @@ public class DetailedEventActivity extends AppCompatActivity {
             editor.apply();
         }
 
-=======
+
         Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
->>>>>>> Stashed changes
+
 
     }
 
