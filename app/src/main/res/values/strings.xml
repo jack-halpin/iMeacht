@@ -7,7 +7,6 @@
     <string name="play">Play</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="welcome_message">Welcome to Event App</string>
 
     <string-array name="planets_array">
         <item>Search</item>
@@ -16,7 +15,15 @@
         <item>About</item>
     </string-array>
 
+    <string-array name="drawer_array">
+        <item>Search will allow you to search for specific events</item>
+        <item>Event Map will place each event shown onto a map</item>
+        <item>My Events will show events stored by you</item>
+        <item>About will tell you more about our App</item>
+    </string-array>
+
     <string-array name="tutorial_array">
+        <item>Welcome to Event App</item>
         <item>On the this screen, you will see the results of a search</item>
     </string-array>
 </resources>

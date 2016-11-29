@@ -95,6 +95,9 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
                 list.add(e);
             } while (cursor.moveToNext());
         }
+
+        cursor.close();
+        db.close();
         Log.e("getAllSavedEvents()", list.toString());
 
         return list;
