@@ -78,8 +78,8 @@ public class ListEventsFromDB  extends Fragment {
     public void getEventInfo(){
         if (eventLists.isEmpty() == true){
             Log.e("E", "is empty");
-            FetchEventInfoFromDB fetch = new ListEvents.FetchEventInfo();
-            fetch.execute("test");
+            FetchEventInfoFromDB fetch = new FetchEventInfoFromDB();
+            fetch.execute();
         }
         //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
         Log.e("getEventInfo:", "called");
@@ -93,9 +93,6 @@ public class ListEventsFromDB  extends Fragment {
         getEventInfo();
     }
 
-
-
-
     public class FetchEventInfoFromDB extends AsyncTask<Void, Void, EventListing[]> {
 
         private final String LOG_TAG = ListEvents.FetchEventInfo.class.getSimpleName();
@@ -103,13 +100,28 @@ public class ListEventsFromDB  extends Fragment {
         @Override
         protected EventListing[] doInBackground(Void... params) {
             //Read in the event objects from the database
+            EventDbOpenHelper db = new EventDbOpenHelper(getActivity());
 
+            ArrayList<EventListing> savedEvents = db.getAllSavedEvents();
+            EventListing[] events = new EventListing[savedEvents.size()];
+
+            for (int i = 0; i < savedEvents.size(); i++) {
+                String url = savedEvents.get(i).getImgUrl();
+                savedEvents.get(i).setBitmapFromURL(url);
+                savedEvents.get(i).setDateObject();
+                events[i] = savedEvents.get(i);
+            }
+
+            return events;
         }
-
-
 
         @Override
         protected void onPostExecute(EventListing[] results) {
             //For each object in the array, add them ot eventLists
+
+            for (int i = 0; i < results.length; i++) {
+                eventLists.add(results[i]);
+            }
         }
+    }
 }
