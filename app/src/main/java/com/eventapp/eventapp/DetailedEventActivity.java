@@ -3,7 +3,11 @@ package com.eventapp.eventapp;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+<<<<<<< Updated upstream
 import android.content.SharedPreferences;
+=======
+import android.graphics.Bitmap;
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DetailedEventActivity extends AppCompatActivity {
@@ -76,6 +81,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 //        TextView v6 = (TextView) findViewById(R.id.textView6);
 //        v6.setText(E.getImgUrl());
 
+<<<<<<< Updated upstream
         if (pref.getBoolean("firstTimeEvent", true)) {
             helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText);
             SharedPreferences.Editor editor = pref.edit();
@@ -83,6 +89,9 @@ public class DetailedEventActivity extends AppCompatActivity {
             editor.apply();
         }
 
+=======
+        Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
+>>>>>>> Stashed changes
 
     }
 
@@ -120,7 +129,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 return false;
                 }
             }
-        db.addEvent(id_check, E.getTitle(), E.getDate(), E.getVenueName(), E.getDetails(), E.getImgUrl());
+        db.addEvent(id_check, E.getTitle(), E.getImgUrl(), E.getDate(), E.getDetails(), E.getVenueName(), E.getUrl(), E.getArtistName(), E.getVenueAddress(), E.getAllDay(), E.getLat(), E.getLng());
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";
