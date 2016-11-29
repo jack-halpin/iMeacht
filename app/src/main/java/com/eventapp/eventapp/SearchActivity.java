@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 /**
@@ -35,6 +36,14 @@ public class SearchActivity extends AppCompatActivity {
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner1.setAdapter(adapter1);
+
+        final Button button = (Button) findViewById(R.id.search_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                searchByDetails():
+            }
+        });
     }
 
     @Override
@@ -44,23 +53,23 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-//    public void searchByDetails(View view) {
-//        String location =  findViewById(R.id.textSearchLocation).toString();
-//        String category = findViewById(R.id.textSearchCategory).toString();
-//        String date = findViewById(R.id.textSearchDate).toString();
-//        StringBuilder url = new StringBuilder("?");
-//        url.append("location=");
-//        url.append(location);
-//        url.append("&");
-//        url.append("category=");
-//        url.append(category);
-//        url.append("&");
-//        url.append("date=");
-//        url.append(date);
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.putExtra("url", url.toString());
-//        startActivity(intent);
-//    }
+    public void searchByDetails() {
+        String location =  findViewById(R.id.textSearchLocation).toString();
+        String category = findViewById(R.id.textSearchCategory).toString();
+        String date = findViewById(R.id.textSearchDate).toString();
+        StringBuilder url = new StringBuilder("?");
+        url.append("location=");
+        url.append(location);
+        url.append("&");
+        url.append("category=");
+        url.append(category);
+        url.append("&");
+        url.append("date=");
+        url.append(date);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("url", url.toString());
+        startActivity(intent);
+    }
 
     public void searchByRecommended(View view) {
         Intent intent = new Intent(this, MainActivity.class);
