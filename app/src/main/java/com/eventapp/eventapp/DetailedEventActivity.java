@@ -91,7 +91,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     /** Called when the user clicks the Send button */
-    public void addCalendar(View view) throws ParseException{
+    public void addCalendar() throws ParseException{
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, E.getStartTime().getTimeInMillis())
@@ -156,6 +156,18 @@ public class DetailedEventActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_item_play:
                 playSearchArtist();
+            case R.id.menu_item_calendar:
+                try {
+                    addCalendar();
+                }
+                catch (Exception e) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Exception: Unexpected input";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

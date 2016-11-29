@@ -20,6 +20,15 @@
             "android.widget.ShareActionProvider"
         tools:ignore="AppCompatResource"
         app:showAsAction="always"
-        android:icon="@drawable/ic_play_light" />
-    <!--android:onClick="Preferences"-->
+        android:icon="@drawable/ic_play_dark" />
+    <item
+        android:id="@+id/menu_item_calendar"
+        android:showAsAction="ifRoom"
+        android:title="@string/calendar"
+        android:actionProviderClass=
+            "android.widget.ShareActionProvider"
+        tools:ignore="AppCompatResource"
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_my_calendar" />
+        <!--android:onClick="Preferences"-->
 </menu>
