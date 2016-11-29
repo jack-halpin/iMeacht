@@ -48,7 +48,8 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
             if (eventTitle != null) {
                 eventTitle.setText(event.getTitle());
-                eventDate.setText(event.getDate());
+
+                eventDate.setText(event.getDay() + ", " + event.getMonth() + " " + event.getDayOfMonth() + " " + event.getYear());
                 eventVenue.setText(event.getVenueName());
             }
         }
