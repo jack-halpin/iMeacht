@@ -32,7 +32,7 @@
         <item>Save Event will add the event to your My Event page, for easy access</item>
         <item>Map Event will show you the location of the event on a map</item>
         <item>The share icon on the action bar will share the event in a variety of ways</item>
-        <item>The play icon on the action bar will play a sample of the artist's music in your default music player</item>
+        <item>The play icon on the action bar will play a sample of the artist\'s music in your default music player</item>
         <item>The calendar icon on the action bar will add the event to your default Calendar application</item>
 
     </string-array>
