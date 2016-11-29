@@ -1,5 +1,6 @@
 package com.eventapp.eventapp;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcel;
@@ -151,7 +152,7 @@ public class EventListing implements Parcelable {
         this.url = url;
         this.nameOfArtist = nameOfArtist;
         this.venueAddress = VenueAdd;
-        setBitmapFromURL(img_url);
+
         this.endTime = endTime;
     }
 
@@ -163,18 +164,24 @@ public class EventListing implements Parcelable {
         this.img = img;
     }
 
+
     //Taken from http://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
-    public void setBitmapFromURL(String src) {
+    public void setBitmapFromURL(String src, Resources res) {
         try {
+            if (src.equals("")){
+                Log.e("setimage", "noimage");
+                Bitmap myBitmap = BitmapFactory.decodeResource(res, R.drawable.no_image);
+            }
+            else {
+                URL url = new URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-            this.img = myBitmap;
+                this.img = myBitmap;
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("Exception",e.getMessage());

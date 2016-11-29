@@ -43,7 +43,12 @@ public class EventAdapter extends ArrayAdapter<EventListing> {
 
 
             if (eventThumbnail != null) {
-                eventThumbnail.setImageBitmap(event.getImage());
+                if (event.getImgUrl().equals("")){
+                    eventThumbnail.setImageResource(R.drawable.no_image);
+                }
+                else {
+                    eventThumbnail.setImageBitmap(event.getImage());
+                }
             }
 
             if (eventTitle != null) {

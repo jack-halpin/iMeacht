@@ -27,10 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static android.R.attr.id;
-import static com.google.android.gms.analytics.internal.zzy.f;
-import static com.google.android.gms.analytics.internal.zzy.p;
-
 public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
@@ -174,7 +170,7 @@ public class ListEvents extends Fragment {
 
 
             try {
-                String base_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD";
+                String base_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&image_sizes=block200";
                 String final_url;
                 //Querying test URL:
                 if (getActivity().getIntent().hasExtra("url")) {
@@ -252,37 +248,36 @@ public class ListEvents extends Fragment {
                 JSONObject currEvent = events.getJSONObject(i);
                 EventListing newEvent = new EventListing();
 
-                if (currEvent.isNull("image")){
+                if (currEvent.isNull("image")) {
                     //Log.v(LOG_TAG, "is null");
                     img_url = "";
-                }
-                else{
+                } else {
                     //Get the url for the image to be displayed
                     img_url = currEvent.getJSONObject("image").getJSONObject("block200").getString("url");
-
-                    //Next get the event date, venue, and details
-                    String title = currEvent.getString("title");
-                    String date = currEvent.getString("start_time");
-                    String endTime = currEvent.getString("stop_time");
-                    String venue = currEvent.getString("venue_name");
-                    int allDay = currEvent.getInt("all_day");
-                    double lat = currEvent.getDouble("latitude");
-                    double lng = currEvent.getDouble("longitude");
-                    String id = currEvent.getString("id");
-                    String url = currEvent.getString("url");
-                    String venueAdd = currEvent.getString("venue_address");
-                    String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
-                    String description;
-                    if (currEvent.getString("description") == "null") {
-                        description = "No information available.";
-                    }
-                    else{
-                        description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
-                    }
-                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, name, endTime);
-
-
                 }
+                //Next get the event date, venue, and details
+                String title = currEvent.getString("title");
+                Log.e("title", title);
+                String date = currEvent.getString("start_time");
+                String endTime = currEvent.getString("stop_time");
+                String venue = currEvent.getString("venue_name");
+                int allDay = currEvent.getInt("all_day");
+                double lat = currEvent.getDouble("latitude");
+                double lng = currEvent.getDouble("longitude");
+                String id = currEvent.getString("id");
+                String url = currEvent.getString("url");
+                String venueAdd = currEvent.getString("venue_address");
+                //String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
+                String description;
+                if (currEvent.getString("description") == "null") {
+                    description = "No information available.";
+                } else {
+                    description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
+                }
+                newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, "fill", endTime);
+                newEvent.setBitmapFromURL(img_url, getResources());
+
+
                 resultStrs[i] = newEvent;
             }
             return resultStrs;
