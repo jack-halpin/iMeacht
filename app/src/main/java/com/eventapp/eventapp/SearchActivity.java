@@ -28,7 +28,13 @@ public class SearchActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        Log.e("Spinner", spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString());
+
+        Spinner spinner1 = (Spinner) findViewById(R.id.sortby_spinner);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.sortby_options, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner1.setAdapter(adapter1);
     }
 
     @Override
