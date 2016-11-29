@@ -3,7 +3,9 @@ package com.eventapp.eventapp;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.v4.view.MenuItemCompat;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,11 @@ public class DetailedEventActivity extends AppCompatActivity {
 
     private EventListing E;
     private ShareActionProvider mShareActionProvider;
+    private RelativeLayout tutorialLayout;
+    private TextView tutorialText;
+    private SharedPreferences pref;
+    private String[] event_tutorial_array;
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -49,6 +57,11 @@ public class DetailedEventActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detailed_event);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        event_tutorial_array = getResources().getStringArray(R.array.event_tutorial_array);
+        tutorialText = (TextView) findViewById(R.id.event_text_tutorial);
+        tutorialLayout = (RelativeLayout) findViewById(R.id.event_tutorial_layout);
+
         ImageView img = (ImageView) findViewById(R.id.imageViewDetailed);
         img.setImageBitmap(E.getImage());
 
@@ -62,6 +75,13 @@ public class DetailedEventActivity extends AppCompatActivity {
         v5.setText(E.getDetails());
 //        TextView v6 = (TextView) findViewById(R.id.textView6);
 //        v6.setText(E.getImgUrl());
+
+        if (pref.getBoolean("firstTimeEvent", true)) {
+            helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("firstTimeEvent", false);
+            editor.apply();
+        }
 
 
     }
