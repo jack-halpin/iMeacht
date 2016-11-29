@@ -116,7 +116,7 @@ public class ListEvents extends Fragment {
             getEventInfo();
             return true;
         } else if(id == R.id.Preferences){
-            Intent intent = new Intent(getActivity(), Preferences.class);
+            Intent intent = new Intent(getActivity(), EventPreferencesActivity.class);
             startActivity(intent);
         }
         Log.e("trying", "to do it");
