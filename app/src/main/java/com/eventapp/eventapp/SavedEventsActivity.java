@@ -48,8 +48,7 @@ public class SavedEventsActivity extends AppCompatActivity {
 
         Log.e("saved events", all);
 
-        TextView v = (TextView) findViewById(R.id.textViewSavedEvents);
-        v.setText(all);
+        
     }
 
     public void deleteSavedEvents(View view) {

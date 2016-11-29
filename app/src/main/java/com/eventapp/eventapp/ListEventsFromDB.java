@@ -120,6 +120,7 @@ public class ListEventsFromDB  extends Fragment {
             //For each object in the array, add them ot eventLists
 
             for (int i = 0; i < results.length; i++) {
+
                 eventLists.add(results[i]);
             }
         }
