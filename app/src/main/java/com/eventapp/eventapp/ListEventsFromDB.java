@@ -3,7 +3,6 @@ package com.eventapp.eventapp;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -107,7 +96,7 @@ public class ListEventsFromDB  extends Fragment {
 
             for (int i = 0; i < savedEvents.size(); i++) {
                 String url = savedEvents.get(i).getImgUrl();
-                savedEvents.get(i).setBitmapFromURL(url);
+                savedEvents.get(i).setBitmapFromURL(url, getResources());
                 savedEvents.get(i).setDateObject();
                 events[i] = savedEvents.get(i);
             }
@@ -120,6 +109,7 @@ public class ListEventsFromDB  extends Fragment {
             //For each object in the array, add them ot eventLists
 
             for (int i = 0; i < results.length; i++) {
+
                 eventLists.add(results[i]);
             }
         }

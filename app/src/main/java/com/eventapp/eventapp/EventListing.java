@@ -1,5 +1,6 @@
 package com.eventapp.eventapp;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcel;
@@ -27,6 +28,7 @@ public class EventListing implements Parcelable {
     private String id;
     private String date;
     private Calendar eventDate;
+    private String endTime;
     private int dayOfWeek;
     private int month;
     private int dayOfMonth;
@@ -58,6 +60,7 @@ public class EventListing implements Parcelable {
         allDay = in.readInt();
         url = in.readString();
         nameOfArtist = in.readString();
+        endTime = in.readString();
     }
 
     public String getDay(){
@@ -128,14 +131,14 @@ public class EventListing implements Parcelable {
     };
 
     public MapDetails returnMapDetails(){
-        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url);
+        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url, this.endTime);
     }
 
     public String getDescription(){
         return this.detail;
     }
 
-    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String nameOfArtist){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String nameOfArtist, String endTime){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -149,8 +152,8 @@ public class EventListing implements Parcelable {
         this.url = url;
         this.nameOfArtist = nameOfArtist;
         this.venueAddress = VenueAdd;
-        setBitmapFromURL(img_url);
 
+        this.endTime = endTime;
     }
 
     public EventListing(String title){
@@ -161,18 +164,24 @@ public class EventListing implements Parcelable {
         this.img = img;
     }
 
+
     //Taken from http://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
-    public void setBitmapFromURL(String src) {
+    public void setBitmapFromURL(String src, Resources res) {
         try {
+            if (src.equals("")){
+                Log.e("setimage", "noimage");
+                Bitmap myBitmap = BitmapFactory.decodeResource(res, R.drawable.no_image);
+            }
+            else {
+                URL url = new URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-            this.img = myBitmap;
+                this.img = myBitmap;
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("Exception",e.getMessage());
@@ -218,8 +227,25 @@ public class EventListing implements Parcelable {
     }
 
     public Calendar getStartTime() throws ParseException{
-        return this.eventDate;
+        Calendar startTime = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime.setTime(sdf.parse(this.date));
+        return startTime;
     }
+
+    public long getEndTime() throws ParseException{
+        if (!this.endTime.equals("null")) {
+            Calendar eventEndTime = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            eventEndTime.setTime(sdf.parse(this.endTime));
+            return eventEndTime.getTimeInMillis();
+        }
+        else {
+            return (this.getStartTime().getTimeInMillis() + (3*60*60*1000));
+        }
+    }
+
+
     public void setImgUrl(String img_url) { this.img_url = img_url; }
 
     public String getDate() { return this.date; }
@@ -275,5 +301,6 @@ public class EventListing implements Parcelable {
         parcel.writeInt(allDay);
         parcel.writeString(url);
         parcel.writeString(nameOfArtist);
+        parcel.writeString(endTime);
     }
 }

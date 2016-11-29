@@ -8,6 +8,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="calendar">Calendar</string>
+    <string name="addevent">Add an event</string>
 
     <string-array name="planets_array">
         <item>Search</item>
@@ -55,5 +56,11 @@
         <item>Culinary</item>
         <item>Sport</item>
         <item>Festivals</item>
+    </string-array>
+
+    <string-array name="sortby_options">
+        <item>Popularity</item>
+        <item>Date</item>
+        <item>Relevance</item>
     </string-array>
 </resources>
