@@ -30,6 +30,7 @@ public class EventListing implements Parcelable {
     private int dayOfWeek;
     private int month;
     private int dayOfMonth;
+    private int year;
     private String detail;
     private String venueName;
     private String url;
@@ -45,6 +46,7 @@ public class EventListing implements Parcelable {
     }
 
     protected EventListing(Parcel in) {
+
         title = in.readString();
         img_url = in.readString();
         img = in.readParcelable(Bitmap.class.getClassLoader());
@@ -57,7 +59,7 @@ public class EventListing implements Parcelable {
         allDay = in.readInt();
         url = in.readString();
         name = in.readString();
-        setDateObject();
+
     }
 
     public String getDay(){
@@ -72,6 +74,32 @@ public class EventListing implements Parcelable {
             default: return "Undefined";
         }
     }
+
+    public int getDayOfMonth(){
+        return this.dayOfMonth;
+    }
+
+    public int getYear(){
+        return this.year;
+    }
+    public String getMonth(){
+        switch(this.month){
+            case 1: return "January";
+            case 2: return "February";
+            case 3: return "March";
+            case 4: return "April";
+            case 5: return "May";
+            case 6: return "June";
+            case 7: return "July";
+            case 8: return "August";
+            case 9: return "September";
+            case 10: return "October";
+            case 11: return "November";
+            case 12: return "December";
+            default: return "Undefined";
+
+        }
+    }
     public void setDateObject() {
         this.eventDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -80,11 +108,10 @@ public class EventListing implements Parcelable {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.e("date", this.date);
-
         this.dayOfWeek = this.eventDate.get(Calendar.DAY_OF_WEEK);
         this.month = this.eventDate.get(Calendar.MONTH);
         this.dayOfMonth = this.eventDate.get(Calendar.DAY_OF_MONTH);
+        this.year = this.eventDate.get(Calendar.YEAR);
         Log.e("num", Integer.toString(this.dayOfWeek));
     }
 
@@ -114,6 +141,7 @@ public class EventListing implements Parcelable {
         this.title = title;
         this.img_url = img_url;
         this.date = date;
+        setDateObject();
         this.allDay = allDay;
         this.detail = detail;
         this.venueName = venue;
@@ -124,6 +152,7 @@ public class EventListing implements Parcelable {
         this.name = name;
         this.venueAddress = VenueAdd;
         setBitmapFromURL(img_url);
+
     }
 
     public String getVenueAddress(){
