@@ -153,9 +153,6 @@ public class EventListing implements Parcelable {
 
     }
 
-    public String getVenueAddress(){
-        return this.venueAddress;
-    }
     public EventListing(String title){
         this.title = title;
     }
@@ -211,6 +208,14 @@ public class EventListing implements Parcelable {
         return (this.allDay > 0);
     }
 
+    public void setAllDay(String val) {
+        if (val == "true") {
+            this.allDay = 1;
+        }
+        else {
+            this.allDay = 0;
+        }
+    }
 
     public Calendar getStartTime() throws ParseException{
         return this.eventDate;
@@ -227,15 +232,29 @@ public class EventListing implements Parcelable {
 
     public String getVenueName() { return this.venueName; }
 
+    public void setVenueName(String venue) { this.venueName = venue; }
+
+    public String getVenueAddress(){
+        return this.venueAddress;
+    }
+
+    public void setVenueAddress(String venueAddress) { this.venueAddress = venueAddress; }
+
     public String getUrl() { return this.url; }
 
-    public void setVenueName(String venue) { this.venueName = venue; }
+    public void setUrl(String url) { this.url = url; }
 
     public Double getLat() { return this.lat; }
 
+    public void setLat(String lat) { this.lat = Double.valueOf(lat); }
+
     public Double getLng() { return this.lng; }
 
+    public void setLng(String lng) { this.lat = Double.valueOf(lng); }
+
     public  String getArtistName() { return this.nameOfArtist; }
+
+    public void setArtistName(String artist) { this.nameOfArtist = artist; }
 
     @Override
     public int describeContents() {

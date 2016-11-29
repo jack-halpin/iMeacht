@@ -106,10 +106,16 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
                 EventListing e = new EventListing();
                 e.setId(cursor.getString(0));
                 e.setTitle(cursor.getString(1));
-                e.setDate(cursor.getString(2));
-                e.setVenueName(cursor.getString(3));
+                e.setImgUrl(cursor.getString(2));
+                e.setDate(cursor.getString(3));
                 e.setDetails(cursor.getString(4));
-                e.setImgUrl(cursor.getString(5));
+                e.setVenueName(cursor.getString(5));
+                e.setUrl(cursor.getString(6));
+                e.setArtistName(cursor.getString(7));
+                e.setVenueAddress(cursor.getString(8));
+                e.setAllDay(cursor.getString(9));
+                e.setLat(cursor.getString(10));
+                e.setLng(cursor.getString(11));
                 list.add(e);
             } while (cursor.moveToNext());
         }
