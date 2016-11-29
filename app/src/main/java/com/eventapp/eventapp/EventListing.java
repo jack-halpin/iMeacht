@@ -210,6 +210,15 @@ public class EventListing implements Parcelable {
         return (this.allDay > 0);
     }
 
+    public void setAllDay(String val) {
+        if (val == "true") {
+            this.allDay = 1;
+        }
+        else {
+            this.allDay = 0;
+        }
+    }
+
     public Calendar getStartTime() throws ParseException{
         Calendar startTime = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
