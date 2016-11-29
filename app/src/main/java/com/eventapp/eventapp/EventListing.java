@@ -27,6 +27,7 @@ public class EventListing implements Parcelable {
     private String id;
     private String date;
     private Calendar eventDate;
+    private String endTime;
     private int dayOfWeek;
     private int month;
     private int dayOfMonth;
@@ -58,6 +59,7 @@ public class EventListing implements Parcelable {
         allDay = in.readInt();
         url = in.readString();
         nameOfArtist = in.readString();
+        endTime = in.readString();
     }
 
     public String getDay(){
@@ -128,14 +130,14 @@ public class EventListing implements Parcelable {
     };
 
     public MapDetails returnMapDetails(){
-        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url);
+        return new MapDetails(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url, this.endTime);
     }
 
     public String getDescription(){
         return this.detail;
     }
 
-    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String nameOfArtist){
+    public void setEventInfo(String title, String img_url, String date, int allDay, String detail, String venue, String VenueAdd, double lat, double lng, String id, String url, String nameOfArtist, String endTime){
         this.title = title;
         this.img_url = img_url;
         this.date = date;
@@ -150,7 +152,7 @@ public class EventListing implements Parcelable {
         this.nameOfArtist = nameOfArtist;
         this.venueAddress = VenueAdd;
         setBitmapFromURL(img_url);
-
+        this.endTime = endTime;
     }
 
     public EventListing(String title){
@@ -208,18 +210,26 @@ public class EventListing implements Parcelable {
         return (this.allDay > 0);
     }
 
-    public void setAllDay(String val) {
-        if (val == "true") {
-            this.allDay = 1;
+    public Calendar getStartTime() throws ParseException{
+        Calendar startTime = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime.setTime(sdf.parse(this.date));
+        return startTime;
+    }
+
+    public long getEndTime() throws ParseException{
+        if (!this.endTime.equals("null")) {
+            Calendar eventEndTime = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            eventEndTime.setTime(sdf.parse(this.endTime));
+            return eventEndTime.getTimeInMillis();
         }
         else {
-            this.allDay = 0;
+            return (this.getStartTime().getTimeInMillis() + (3*60*60*1000));
         }
     }
 
-    public Calendar getStartTime() throws ParseException{
-        return this.eventDate;
-    }
+
     public void setImgUrl(String img_url) { this.img_url = img_url; }
 
     public String getDate() { return this.date; }
@@ -275,5 +285,6 @@ public class EventListing implements Parcelable {
         parcel.writeInt(allDay);
         parcel.writeString(url);
         parcel.writeString(nameOfArtist);
+        parcel.writeString(endTime);
     }
 }

@@ -260,6 +260,7 @@ public class ListEvents extends Fragment {
                     //Next get the event date, venue, and details
                     String title = currEvent.getString("title");
                     String date = currEvent.getString("start_time");
+                    String endTime = currEvent.getString("stop_time");
                     String venue = currEvent.getString("venue_name");
                     int allDay = currEvent.getInt("all_day");
                     double lat = currEvent.getDouble("latitude");
@@ -275,7 +276,7 @@ public class ListEvents extends Fragment {
                     else{
                         description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                     }
-                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, name);
+                    newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, name, endTime);
 
 
                 }

@@ -22,8 +22,9 @@ public class MapDetails implements Serializable {
     private String venueAdd;
     private String name;
     private String url;
+    private String endTime;
 
-    public MapDetails(String title, String snippet, String date, double lng, double lat, String img_url, String venue, String id, int allDay, String venueAdd, String name, String url) {
+    public MapDetails(String title, String snippet, String date, double lng, double lat, String img_url, String venue, String id, int allDay, String venueAdd, String name, String url, String endTime) {
         this.title = title;
         this.snippet = snippet;
         this.date = date;
@@ -36,6 +37,7 @@ public class MapDetails implements Serializable {
         this.venueAdd = venueAdd;
         this.name = name;
         this.url = url;
+        this.endTime = endTime;
     }
 
     public String getTitle() { return title; }
@@ -67,5 +69,7 @@ public class MapDetails implements Serializable {
     public String getName() { return name; }
 
     public String getUrl() { return url; }
+
+    public String getEndTime() {return endTime;}
 
 }
