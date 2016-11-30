@@ -6,4 +6,11 @@
         android:summary="The preference set here will be used to modify our recommender system to allow us to improve our service"
         android:entries="@array/preferences_array"
         android:entryValues="@array/preferences_values"/>
+
+    <EditTextPreference
+        android:title="Location"
+        android:key="location"
+        android:defaultValue="Dublin"
+        android:inputType="text"
+        android:singleLine="true" />
 </PreferenceScreen>

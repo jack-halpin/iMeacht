@@ -71,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
         StringBuilder url = new StringBuilder("&");
 
         url.append("location=");
-        url.append(location);
+        url.append(location.replaceAll(" ", "+"));
         url.append("&");
         url.append("category=");
         url.append(category.toLowerCase());
