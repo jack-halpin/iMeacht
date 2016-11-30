@@ -52,11 +52,11 @@ public class ListEvents extends Fragment {
         if (selected != null) {
             int size = selected.size();
             int count = 1;
-            String pref = "&keywords=";
+            String pref = "&category=";
             for (String item : selected) {
-                pref += item;
+                pref += item.toLowerCase();
                 if (count < size) {
-                    pref += "&";
+                    pref += ",";
                     count++;
                 }
             }
@@ -184,7 +184,7 @@ public class ListEvents extends Fragment {
                     Log.e("URL", final_url);
                 } else {
                     // Original URL
-                    final_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin";
+                    final_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin" + getPrefString();
                 }
                 Log.e("URL", final_url);
 //                final String testurl = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200&location=Dublin" + prefString.getPrefString();
@@ -273,7 +273,12 @@ public class ListEvents extends Fragment {
                 String id = currEvent.getString("id");
                 String url = currEvent.getString("url");
                 String venueAdd = currEvent.getString("venue_address");
-                String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
+                String name;
+                if(currEvent.isNull("performers")){
+                    name = "Unknown";
+                } else{
+                    name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
+                }
                 String description;
                 if (currEvent.getString("description") == "null") {
                     description = "No information available.";

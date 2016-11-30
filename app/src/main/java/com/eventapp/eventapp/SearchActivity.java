@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
         String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
         Spinner spinner1 = (Spinner) findViewById(R.id.sortby_spinner);
-        String sortby = spinner1.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+        String sortby = spinner1.getItemAtPosition(spinner1.getSelectedItemPosition()).toString();
 
         StringBuilder url = new StringBuilder("&");
 
@@ -74,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
         url.append(location);
         url.append("&");
         url.append("category=");
-        url.append(category);
+        url.append(category.toLowerCase());
         url.append("&");
         url.append("sort_order=");
         url.append(sortby);
