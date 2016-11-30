@@ -32,7 +32,7 @@ public class EventPreferencesActivity extends PreferenceActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            Toast.makeText(getActivity(), "Settings Changed", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Preferences Changed", Toast.LENGTH_LONG).show();
         }
 
         @Override
