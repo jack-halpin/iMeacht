@@ -42,21 +42,67 @@
     </string-array>
 
     <string-array name="preferences_array">
-        <item>Music</item>
-        <item>Books</item>
+        <item>Animals</item>
         <item>Art</item>
-        <item>Culinary</item>
-        <item>Sport</item>
-        <item>Festivals</item>
+        <item>Attractions</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>Clubs_Associations</item>
+        <item>Comedy</item>
+        <item>Community</item>
+        <item>Conference</item>
+        <item>Famiy_Fun_Kids</item>
+        <item>Festivals_Parades</item>
+        <item>Food</item>
+        <item>Fundraisers</item>
+        <item>Holiday</item>
+        <item>Learning_Education</item>
+        <item>Movies_Film</item>
+        <item>Music</item>
+        <item>Other</item>
+        <item>Outdoors_Recreation</item>
+        <item>Performing_Arts</item>
+        <item>Politics_Activism</item>
+        <item>Religion_Spirituality</item>
+        <item>Sales</item>
+        <item>Schools_Alumni</item>
+        <item>Science</item>
+        <item>Singles_Social</item>
+        <item>Sports</item>
+        <item>Support</item>
+        <item>Technology</item>
     </string-array>
 
     <string-array name="preferences_values">
-        <item>Music</item>
-        <item>Books</item>
+        <item>Animals</item>
         <item>Art</item>
-        <item>Culinary</item>
-        <item>Sport</item>
-        <item>Festivals</item>
+        <item>Attractions</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>Clubs_Associations</item>
+        <item>Comedy</item>
+        <item>Community</item>
+        <item>Conference</item>
+        <item>Famiy_Fun_Kids</item>
+        <item>Festivals_Parades</item>
+        <item>Food</item>
+        <item>Fundraisers</item>
+        <item>Holiday</item>
+        <item>Learning_Education</item>
+        <item>Movies_Film</item>
+        <item>Music</item>
+        <item>Other</item>
+        <item>Outdoors_Recreation</item>
+        <item>Performing_Arts</item>
+        <item>Politics_Activism</item>
+        <item>Religion_Spirituality</item>
+        <item>Sales</item>
+        <item>Schools_Alumni</item>
+        <item>Science</item>
+        <item>Singles_Social</item>
+        <item>Sports</item>
+        <item>Support</item>
+        <item>Technology</item>
     </string-array>
 
     <string-array name="sortby_options">

@@ -24,7 +24,7 @@ public class Preferences extends AppCompatActivity {
         setContentView(R.layout.activity_preferences);
 
         AlertDialog dialog;
-        final CharSequence[] items = {" Music ", " Books ", " Art "," Culinary "," Sport ", " Festivals "};
+        final CharSequence[] items = {"Animals", "Art", "Attractions", "Books", "Business", "Clubs_Associations", "Comedy", "Community", "Conference", "Family_Fun_Kids", "Festivals_Parades", "Food", "Fundraisers", "Holiday", "Learning_Education", "Movies_film", "Music", "Other", "Outdoors_Recreation", "Performing_Arts", "Politics_Activism", "Religion_Spirituality", "Sales", "Schools_Alumni", "Science", "Singles_Social", "Sports", "Support", "Technology"};
         // placeholder keywords for now, ideally we would use a complete list from Eventful.
 
         final ArrayList selectedItems=new ArrayList();
