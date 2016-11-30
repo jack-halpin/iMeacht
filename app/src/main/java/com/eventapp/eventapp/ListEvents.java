@@ -7,7 +7,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import java.util.Set;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,21 +46,24 @@ public class ListEvents extends Fragment {
     fetch = new FetchEventInfo();
 }
     public String getPrefString() {
-        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("storedPrefs", Context.MODE_PRIVATE);
-        int size = sharedPref.getAll().size();
-
-        String pref = "&keywords=";
-        for (int i = 0; i < size; i++) {
-            pref += sharedPref.getString("Pref_" + i, "");
-            if (i != (size - 1)) {
-                pref += "&";
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Set<String> selected = sharedPref.getStringSet(getResources().getString(R.string.pref_persistent_storage), null);
+        if (selected != null) {
+            int size = selected.size();
+            int count = 1;
+            String pref = "&keywords=";
+            for (String item : selected) {
+                pref += item;
+                if (count < size) {
+                    pref += "&";
+                    count++;
+                }
             }
+            return pref;
+        } else {
+            return "";
         }
-        return pref;
     }
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
