@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -316,6 +317,8 @@ public class ListEvents extends Fragment {
 
 
             if (results != null) {
+                TextView screenText = (TextView) getActivity().findViewById(R.id.loading_text);
+                screenText.setVisibility(View.GONE);
                 eventLists.clear();
                 //mForecastAdapter.addAll(result);
                 for (int i = 0; i < results.length; i++) {
@@ -324,6 +327,10 @@ public class ListEvents extends Fragment {
                 //Log.e(LOG_TAG, "First Item: " + eventLists.getItem(0));
 
                 ((MainActivity)getActivity()).setCurrEvents(eventLists);
+            }
+            else{
+                TextView screenText = (TextView) getActivity().findViewById(R.id.loading_text);
+                screenText.setText("Sorry your search returned no results.");
             }
 
         }
