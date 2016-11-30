@@ -273,14 +273,14 @@ public class ListEvents extends Fragment {
                 String id = currEvent.getString("id");
                 String url = currEvent.getString("url");
                 String venueAdd = currEvent.getString("venue_address");
-                //String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
+                String name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
                 String description;
                 if (currEvent.getString("description") == "null") {
                     description = "No information available.";
                 } else {
                     description = android.text.Html.fromHtml(currEvent.getString("description")).toString();
                 }
-                newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, "fill", endTime);
+                newEvent.setEventInfo(title, img_url, date, allDay, description, venue, venueAdd, lat, lng, id, url, name, endTime);
                 newEvent.setBitmapFromURL(img_url, getResources());
 
 
