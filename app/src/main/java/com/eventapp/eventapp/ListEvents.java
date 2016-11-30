@@ -30,6 +30,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.google.android.gms.analytics.internal.zzy.g;
+
 public class ListEvents extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
@@ -115,7 +117,8 @@ public class ListEvents extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.get_info){
-            getEventInfo();
+            fetch = new FetchEventInfo();
+            fetch.execute();
             return true;
         } else if(id == R.id.Preferences){
             Intent intent = new Intent(getActivity(), EventPreferencesActivity.class);
@@ -155,6 +158,13 @@ public class ListEvents extends Fragment {
 
         private final String LOG_TAG = FetchEventInfo.class.getSimpleName();
 
+        @Override
+        protected void onPreExecute(){
+            eventLists.clear();
+            TextView status = (TextView) getActivity().findViewById(R.id.loading_text);
+            status.setVisibility(View.VISIBLE);
+            status.setText("Loading...");
+        }
         @Override
         protected EventListing[] doInBackground(String... params) {
 
