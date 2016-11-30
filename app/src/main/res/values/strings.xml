@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Event App</string>
+    <string name="app_name">iMeacht</string>
     <string name="title_activity_list_events">list_events</string>
     <string name="menuitem">Settings</string>
     <string name="title_activity_maps">Map</string>
