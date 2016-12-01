@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DetailedEventActivity extends AppCompatActivity {
@@ -69,7 +68,8 @@ public class DetailedEventActivity extends AppCompatActivity {
         TextView v2 = (TextView) findViewById(R.id.textView2);
         v2.setText(E.getTitle());
         TextView v3 = (TextView) findViewById(R.id.textView3);
-        v3.setText(E.getDate());
+        E.setDateObject();
+        v3.setText(E.getDay() + ", " + E.getMonth() + " " + E.getDayOfMonth() + " " + E.getYear());
         TextView v4 = (TextView) findViewById(R.id.textView4);
         v4.setText(E.getVenueName());
         TextView v5 = (TextView) findViewById(R.id.textView5);

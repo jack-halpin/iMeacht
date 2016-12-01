@@ -14,7 +14,7 @@
     <fragment
 
         android:id="@+id/fragment"
-        android:name="com.eventapp.eventapp.ListEventsFromDB"
+        android:name="com.eventapp.eventapp.ListEventsFromDBFragment"
         tools:layout="@layout/activity_list_events"
         android:layout_width="match_parent"
         android:layout_height="237dp"

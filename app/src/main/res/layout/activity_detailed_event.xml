@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
         tools:context="com.eventapp.eventapp.DetailedEventActivity">
 
 
@@ -42,11 +42,13 @@
                         android:id="@+id/imageViewDetailed" />
 
                     <TextView
-                        android:text="TextView"
+
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView2"
-                        android:textColor="@android:color/background_dark"
                         android:layout_below="@+id/imageViewDetailed"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -56,6 +58,7 @@
 
                     <TextView
                         android:text="TextView"
+                        style="@style/DateEntry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView3"
@@ -78,8 +81,16 @@
                         android:textColor="@android:color/background_dark"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:paddingBottom="6dp"/>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description:"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        />
                     <TextView
                         android:text="TextView"
                         android:layout_width="match_parent"
@@ -88,7 +99,7 @@
                         android:layout_below="@+id/textView4"
                         android:layout_alignLeft="@+id/textView4"
                         android:layout_alignStart="@+id/textView4"
-                        android:textColor="@android:color/background_dark"
+
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true" />
 

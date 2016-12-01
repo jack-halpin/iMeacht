@@ -1,11 +1,9 @@
 package com.eventapp.eventapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,13 +49,20 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.listings_menu, menu);
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch(id) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void searchByDetails() {
@@ -79,16 +84,11 @@ public class SearchActivity extends AppCompatActivity {
         url.append("sort_order=");
         url.append(sortby);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SearchResultsActivity.class);
         intent.putExtra("url", url.toString());
         startActivity(intent);
     }
 
-    public void searchByRecommended(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("url", "recommended");
-        startActivity(intent);
-    }
 
 
 

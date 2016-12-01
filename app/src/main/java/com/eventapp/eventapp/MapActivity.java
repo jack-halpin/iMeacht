@@ -1,13 +1,10 @@
 package com.eventapp.eventapp;
 
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.app.FragmentTransaction;
-import android.view.Menu;
 import android.app.FragmentManager;
-
-import com.google.android.gms.maps.MapFragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -29,15 +26,23 @@ public class MapActivity extends AppCompatActivity {
         mf.setArguments(data);
         ft.replace(R.id.map_placeholder, mf);
         ft.commit();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.listings_menu, menu);
-        return true;
-    }
 
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch(id) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void finish() {
         super.finish();

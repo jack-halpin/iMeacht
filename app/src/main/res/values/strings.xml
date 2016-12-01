@@ -11,10 +11,9 @@
     <string name="addevent">Add an event</string>
     <string name="pref_persistent_storage">persistent_key</string>
 
-    <string-array name="planets_array">
+    <string-array name="drawer_items">
         <item>Search</item>
-        <item>Event Map</item>
-        <item>My Events</item>
+        <item>Favourites</item>
         <item>About</item>
     </string-array>
 
@@ -110,4 +109,11 @@
         <item>Date</item>
         <item>Relevance</item>
     </string-array>
+
+    <string name="about_us"><font color='#FF9800'>imeacht</font> is an app built by
+    <b>Brendan Dwyer, Conor Devoy, Devin Stacey, Jack Halpin and Patrick Harney</b>
+     who are Computer Science students at the University College Dublin.\n\n
+
+    We created this app to allow people to discover new and fun things to do around their area and share them with their friends! All the information
+    is supplied by eventful, you can check them out www.eventful.com!</string>.
 </resources>

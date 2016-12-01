@@ -15,11 +15,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".PersonalEventsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             >
 
         </activity>
+        <activity android:name="AboutUsActivity" />
+        <activity android:name=".SearchResultsActivity" />
         <activity android:name=".DetailedEventActivity" />
         <activity android:name=".SearchActivity" />
         <!--

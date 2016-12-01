@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by Jack on 29/11/2016.
  */
 
-public class ListEventsFromDB  extends Fragment {
+public class ListEventsFromDBFragment  extends Fragment {
 
     private EventAdapter eventLists;
 
@@ -84,7 +84,7 @@ public class ListEventsFromDB  extends Fragment {
 
     public class FetchEventInfoFromDB extends AsyncTask<Void, Void, EventListing[]> {
 
-        private final String LOG_TAG = ListEvents.FetchEventInfo.class.getSimpleName();
+        private final String LOG_TAG = ListEventsFragment.FetchEventInfo.class.getSimpleName();
 
         @Override
         protected EventListing[] doInBackground(Void... params) {

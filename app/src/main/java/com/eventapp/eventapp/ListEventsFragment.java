@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import java.util.Set;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,10 +29,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Set;
 
-import static com.google.android.gms.analytics.internal.zzy.g;
-
-public class ListEvents extends Fragment {
+public class ListEventsFragment extends Fragment {
 
     //This is declared in the class so it can be accessed by the inner public class
     private EventAdapter eventLists;
@@ -41,12 +40,11 @@ public class ListEvents extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        fetch = new FetchEventInfo();
+
         Log.e("Prefs", getPrefString());
     }
 @Override public void onResume(){
     super.onResume();
-    fetch = new FetchEventInfo();
 }
     public String getPrefString() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -116,13 +114,34 @@ public class ListEvents extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        if (id == R.id.get_info){
-            fetch = new FetchEventInfo();
-            fetch.execute();
-            return true;
-        } else if(id == R.id.Preferences){
-            Intent intent = new Intent(getActivity(), EventPreferencesActivity.class);
-            startActivity(intent);
+        switch(id) {
+            case R.id.get_info:
+                fetch = new FetchEventInfo();
+                fetch.execute();
+                return true;
+            case R.id.Preferences:
+                Intent intent = new Intent(getActivity(), EventPreferencesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_map_event:
+                Log.e("menu_map", fetch.getStatus().toString());
+                //Check that the asynctask if finished
+                if(fetch.getStatus() == AsyncTask.Status.FINISHED){
+                    ArrayList<MapDetails> locations = new ArrayList();
+                    for (int i = 0; i < eventLists.getCount(); i++){
+                        locations.add(eventLists.getItem(i).returnMapDetails());
+                    }
+                    Context context = getActivity();
+                    intent = new Intent(context, MapActivity.class);
+                    intent.putExtra("locations", locations);
+                    startActivity(intent);
+                    break;
+                }else{
+                    Toast toast = Toast.makeText(getActivity(), "Events still loading. Please try again later.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    break;
+                }
+
         }
         Log.e("trying", "to do it");
         return super.onOptionsItemSelected(item);
@@ -135,8 +154,10 @@ public class ListEvents extends Fragment {
             fetch = new FetchEventInfo();
             fetch.execute("test");
         }
+        Log.e("eventInfo", fetch.getStatus().toString());
         //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
         Log.e("getEventInfo:", "called");
+        Log.e("eventInfo", fetch.getStatus().toString());
 
     }
 
@@ -341,7 +362,7 @@ public class ListEvents extends Fragment {
                 }
                 //Log.e(LOG_TAG, "First Item: " + eventLists.getItem(0));
 
-                ((MainActivity)getActivity()).setCurrEvents(eventLists);
+
             }
             else{
                 TextView screenText = (TextView) getActivity().findViewById(R.id.loading_text);
