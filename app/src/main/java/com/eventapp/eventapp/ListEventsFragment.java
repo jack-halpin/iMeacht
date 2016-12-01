@@ -174,13 +174,28 @@ public class ListEventsFragment extends Fragment {
 
         @Override
         protected void onPreExecute(){
+
+
+
             //If there is currently anything in the evenLists object we want to delete them
             eventLists.clear();
-
-            //Notify the user that the task is loading up the relevant information
             TextView status = (TextView) getActivity().findViewById(R.id.loading_text);
             status.setVisibility(View.VISIBLE);
             status.setText("Loading...");
+            //If parent activity is PersonalEventsActivity make sure that user preferences have been defined
+            if(!getActivity().getIntent().hasExtra("url")){
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                //IF they haven't been defined or the user has set them so they include nothing notify the user and cancel the asynctask
+                if (!sharedPref.contains(getResources().getString(R.string.pref_persistent_storage)) || sharedPref.getStringSet(getResources().getString(R.string.pref_persistent_storage), null).isEmpty()){
+                    status.setText("Please choose a category in Preferences.");
+                    cancel(true);
+                }
+            }
+
+
+            //Notify the user that the task is loading up the relevant information
+
+
         }
 
         @Override
@@ -196,17 +211,20 @@ public class ListEventsFragment extends Fragment {
             String eventJsonStr = null;
 
 
+
             //Next need to construct the URL string used to query the API
             try {
                 //Define the base url that contains the API key for the application
                 String base_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&image_sizes=block200";
                 String final_url;
 
+
+
                 //If the fragments parent activity has been passed a URL segmant then we will use that to search for events
                 if (getActivity().getIntent().hasExtra("url")) {
                     final_url = base_url + getActivity().getIntent().getStringExtra("url");
-
                 }
+
                 //Otherwise just use the URL that is generated when using the users preferences
                 else {
                     final_url = base_url + getPrefString();
