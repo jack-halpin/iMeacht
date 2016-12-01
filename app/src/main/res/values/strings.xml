@@ -19,7 +19,6 @@
 
     <string-array name="drawer_array">
         <item>Search allows you to search for specific events and categories</item>
-        <item>Event Map places fetched events on a map</item>
         <item>Favourites shows your stored events</item>
         <item>About provides a brief synopsis of our App</item>
     </string-array>
