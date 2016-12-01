@@ -209,7 +209,7 @@ public class ListEventsFragment extends Fragment {
                 }
                 //Otherwise just use the URL that is generated when using the users preferences
                 else {
-                    final_url = "http://api.eventful.com/json/events/search?app_key=p3tDfpd3dKGs2HBD&sort_order=popularity&image_sizes=block200" + getPrefString();
+                    final_url = base_url + getPrefString();
                 }
 
                 Log.e("URL", final_url);
