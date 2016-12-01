@@ -36,6 +36,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
 
+        getSupportActionBar().setTitle("Search Results");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

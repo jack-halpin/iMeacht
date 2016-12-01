@@ -85,10 +85,20 @@ public class DetailedEventActivity extends AppCompatActivity {
         }
 
 
+        getSupportActionBar().setTitle("Event Details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 //        Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
 
 
     }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+    }
+
 
     /** Called when the user clicks the Send button */
     public void addCalendar(View view) throws ParseException{
@@ -147,6 +157,9 @@ public class DetailedEventActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
             case R.id.menu_item_share:
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");

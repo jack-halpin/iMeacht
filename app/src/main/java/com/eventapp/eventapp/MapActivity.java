@@ -27,6 +27,7 @@ public class MapActivity extends AppCompatActivity {
         ft.replace(R.id.map_placeholder, mf);
         ft.commit();
 
+        getSupportActionBar().setTitle("Map");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
