@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--Share and Play icons are added to menu-->
     <item
         android:id="@+id/menu_item_share"
         android:showAsAction="ifRoom"
@@ -21,5 +22,5 @@
         tools:ignore="AppCompatResource"
         app:showAsAction="always"
         android:icon="@drawable/ic_play_dark" />
-        <!--android:onClick="Preferences"-->
+        
 </menu>
