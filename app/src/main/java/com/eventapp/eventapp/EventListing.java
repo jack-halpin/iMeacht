@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -242,7 +243,7 @@ public class EventListing implements Parcelable {
 
     public Double getLng() { return this.lng; }
 
-    public void setLng(String lng) { this.lat = Double.valueOf(lng); }
+    public void setLng(String lng) { this.lng = Double.valueOf(lng); }
 
     public  String getArtistName() { return this.nameOfArtist; }
 

@@ -67,6 +67,7 @@ public class ListEventsFragment extends Fragment {
                 }
             }
             //Finally add the users location
+            location = location.replaceAll(" ", "+");
             user_pref += "&location=" + location;
 
             return user_pref;
