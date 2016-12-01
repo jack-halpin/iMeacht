@@ -12,11 +12,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by devcon90 on 11/14/16.
+ * A database helper for saving interesting events, and also deleting them
  */
 
 public class EventDbOpenHelper extends SQLiteOpenHelper {
 
+    // database columns
     final static String ACT_ID = "id";
     final static String TABLE_NAME = "saved_events";
     final static String ACT_TITLE = "title";
@@ -32,6 +33,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
     final static String LNG = "lng";
     final static String [] columns = { ACT_TITLE, ACT_IMG_URL, ACT_ID, ACT_DATE, ACT_DETAILS, ACT_VENUE, ACT_URL, ACT_NAME, VENUE_ADDRESS, ALL_DAY, LAT, LNG };
 
+    // creates the database
     final private static String CREATE_CMD =
 
         "CREATE TABLE saved_events ("
@@ -48,6 +50,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
             + LAT + " TEXT, "
             + LNG + " TEXT)";
 
+    // db setup
     final private static String NAME = "event_db";
     final private static Integer VERSION = 1;
     final private Context mContext;
@@ -69,6 +72,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // add events to the db
     public void addEvent(String id, String title, String img_url, String date, String details, String venue, String url, String name, String venue_address, boolean all_day, Double lat, Double lng) {
         Log.e("addEventID", id);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -92,6 +96,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // get all saved events from db
     public ArrayList<EventListing> getAllSavedEvents() {
 
         ArrayList<EventListing> list = new ArrayList<EventListing>();
@@ -127,6 +132,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    // get all the ids of saved events, used to check if an event has already been saved to the db
     public List<String> getAllSavedEventsIDS() {
         List<String> savedEventIDS = new LinkedList<String>();
 
@@ -147,5 +153,6 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         return savedEventIDS;
     }
 
+    // deletes the database
     public void deleteDatabase() { mContext.deleteDatabase(NAME); }
 }

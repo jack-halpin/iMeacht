@@ -50,8 +50,6 @@ public class DetailedEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        String a = getIntent().getExtras().getString("EVENT_ID");
-//        Log.e("object title", a);
 
         E = getIntent().getExtras().getParcelable("EVENT_OBJ");
 
@@ -74,8 +72,6 @@ public class DetailedEventActivity extends AppCompatActivity {
         v4.setText(E.getVenueName());
         TextView v5 = (TextView) findViewById(R.id.textView5);
         v5.setText(E.getDetails());
-//        TextView v6 = (TextView) findViewById(R.id.textView6);
-//        v6.setText(E.getImgUrl());
 
         if (pref.getBoolean("firstTimeEvent", true)) {
             helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText, this);
@@ -88,9 +84,6 @@ public class DetailedEventActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Event Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-//        Log.e("object output", E.getTitle() + ", " + E.getImgUrl() + ", " + E.getId() + ", " + E.getDate() + ", " + E.getDetails() + ", " + E.getVenueName() + ", " + E.getUrl() + ", " + E.getArtistName() + ", " + E.getVenueAddress() + ", " + E.getAllDay() + ", " + E.getLat() + ", " + E.getLng());
-
-
     }
 
 
@@ -116,8 +109,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
     // Save button listener method
     public boolean addSavedEvent(View view) {
-//        String a = getIntent().getExtras().getString("EVENT_ID");
-
+        // method adds the event to the database
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
         String id_check = E.getId();
