@@ -41,7 +41,7 @@ public class EventListing implements Parcelable {
     private String url;                     //The url to the event listing on the eventful website
     private String nameOfArtist;            //Name of the performing artist
     private String venueAddress;            //Address of the venue
-    private int allDay;
+    private int allDay;                     // Whether the event is an all day event or not (0 is not all day)
     private double lat;                     //Latitude
     private double lng;                     //Logitude
 
@@ -156,7 +156,7 @@ public class EventListing implements Parcelable {
         return new MapEventListing(this.title, this.detail, this.date, this.lng, this.lat, this.img_url, this.venueName, this.id, this.allDay, this.venueAddress, this.nameOfArtist, this.url, this.endTime);
     }
 
-
+    // Creates a Calendar object representing the start time of an event
     public Calendar getStartTime() throws ParseException{
         Calendar startTime = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -164,6 +164,7 @@ public class EventListing implements Parcelable {
         return startTime;
     }
 
+    // Returns either the event end time or the event start time + 3hrs (in ms) if no end time is given
     public long getEndTime() throws ParseException{
         if (!this.endTime.equals("null")) {
             Calendar eventEndTime = Calendar.getInstance();

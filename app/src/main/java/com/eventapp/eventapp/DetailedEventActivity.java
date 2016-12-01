@@ -33,7 +33,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private String[] event_tutorial_array;
 
-
+    // Method to create an options menu in action bar
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.share_menu, menu);
@@ -93,7 +93,8 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
 
-    /** Called when the user clicks the Send button */
+    /** Called when the user clicks the Calenadr button 
+        Adds an event to the phone's default calenadr app */
     public void addCalendar(View view) throws ParseException{
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
@@ -146,6 +147,8 @@ public class DetailedEventActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /** Checks which item from action bar menu has been selected
+        Chooses an appropriate reaction in each caae */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
@@ -153,6 +156,7 @@ public class DetailedEventActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.menu_item_share:
+                // Creates intent to share an event with messaging/email applications
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, E.getTitle());
@@ -161,11 +165,14 @@ public class DetailedEventActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_item_play:
                 playSearchArtist();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    
+    /** Method to search media applications for a performer 
+        Only launched if an application can respond to the intent */
     public void playSearchArtist() {
         Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
         intent.putExtra(MediaStore.EXTRA_MEDIA_FOCUS,
