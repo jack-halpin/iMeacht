@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
         EditText medit = (EditText)findViewById(R.id.location_editText);
         String location =  medit.getText().toString();
         Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
-        
+
         int position = spinner.getSelectedItemPosition();
         String[] selectedArray = getResources().getStringArray(R.array.preferences_values);
         String category = selectedArray[position];
