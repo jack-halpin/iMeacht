@@ -24,8 +24,10 @@
     </string-array>
 
     <string-array name="tutorial_array">
-        <item>Welcome to Event App!</item>
-        <item>This screen shows suggested events as filtered by your preferences</item>
+        <item>Welcome to iMeacht!</item>
+        <item>This is the main screen and shows suggested events as filtered by your preferences</item>
+        <item>The Map icon on the action bar will map all events found onto a map for easy locating</item>
+        <item>The Settings icon on the action bar will allow you to customise your default preferences</item>
         <item>In order to customise your experience, please choose a selection of categories</item>
     </string-array>
 
@@ -45,27 +47,27 @@
         <item>Attractions</item>
         <item>Books</item>
         <item>Business</item>
-        <item>Clubs_Associations</item>
+        <item>Clubs and Associations</item>
         <item>Comedy</item>
         <item>Community</item>
         <item>Conference</item>
-        <item>Famiy_Fun_Kids</item>
-        <item>Festivals_Parades</item>
+        <item>Fun for Family and Kids</item>
+        <item>Festivals and Parades</item>
         <item>Food</item>
         <item>Fundraisers</item>
         <item>Holiday</item>
-        <item>Learning_Education</item>
-        <item>Movies_Film</item>
+        <item>Learning and Education</item>
+        <item>Movies and Film</item>
         <item>Music</item>
         <item>Other</item>
-        <item>Outdoors_Recreation</item>
-        <item>Performing_Arts</item>
-        <item>Politics_Activism</item>
-        <item>Religion_Spirituality</item>
+        <item>Outdoors and Recreation</item>
+        <item>Performing Arts</item>
+        <item>Politics or Activism</item>
+        <item>Religion and Spirituality</item>
         <item>Sales</item>
-        <item>Schools_Alumni</item>
+        <item>Alumni Events</item>
         <item>Science</item>
-        <item>Singles_Social</item>
+        <item>Singles Mingle</item>
         <item>Sports</item>
         <item>Support</item>
         <item>Technology</item>

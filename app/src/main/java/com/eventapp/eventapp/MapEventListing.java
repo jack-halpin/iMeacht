@@ -8,6 +8,9 @@ import java.net.HttpURLConnection;
 
 public class MapEventListing implements Serializable {
 
+    // This MapEventListing merely holds the information for a single event.
+    // It is similar to EventListing, but does not contain any code to create a BitMap image
+    // Therefore, it is serializable
     private static final long serialVersionUID = 1L;
 
     private String title;

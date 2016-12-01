@@ -41,7 +41,7 @@ public class helpers {
                         // If the count is less than the length fo the array, set the text to count index of array
                         if (count < tutStringArray.length) {
                             tutorialText.setText(tutStringArray[count]);
-                            // Incriment count
+                            // Increment count
                             count++;
                         } else {
                             // If count is equal to or greater than size of string array, make tut invisible
@@ -49,6 +49,7 @@ public class helpers {
                             tutorialLayout.setVisibility(View.INVISIBLE);
                             // Set clickable to false so clicks can pass through again.
                             tutorialLayout.setClickable(false);
+                            // If it is the first time boot, bring user to customize events
                             if (pref.getBoolean("firstTimeBoot", true)) {
                                 Intent intent = new Intent(context, EventPreferencesActivity.class);
                                 context.startActivity(intent);

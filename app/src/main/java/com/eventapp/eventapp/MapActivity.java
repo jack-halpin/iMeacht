@@ -16,13 +16,17 @@ public class MapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<MapEventListing> locations = (ArrayList<MapEventListing>) getIntent().getExtras().getSerializable("locations");
+        // Fetch intent extras and store them in an arrayList
+        locations = (ArrayList<MapEventListing>) getIntent().getExtras().getSerializable("locations");
         setContentView(R.layout.activity_maps);
+        // Create fragment of MapsFragment
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         MapsFragment mf = new MapsFragment();
         Bundle data = new Bundle();
+        // Create a bundle and place the locations into the bundle
         data.putSerializable("locations", locations);
+        // Set the arguments and replace map_placeholder with the fragment
         mf.setArguments(data);
         ft.replace(R.id.map_placeholder, mf);
         ft.commit();
@@ -36,6 +40,7 @@ public class MapActivity extends AppCompatActivity {
 
 
     public boolean onOptionsItemSelected(MenuItem item){
+        // Use this to allow the ActionBar in the activity
         int id = item.getItemId();
         switch(id) {
             case android.R.id.home:
