@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 
-public class MapDetails implements Serializable {
+public class MapEventListing implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class MapDetails implements Serializable {
     private String url;
     private String endTime;
 
-    public MapDetails(String title, String snippet, String date, double lng, double lat, String img_url, String venue, String id, int allDay, String venueAdd, String name, String url, String endTime) {
+    public MapEventListing(String title, String snippet, String date, double lng, double lat, String img_url, String venue, String id, int allDay, String venueAdd, String name, String url, String endTime) {
         this.title = title;
         this.snippet = snippet;
         this.date = date;

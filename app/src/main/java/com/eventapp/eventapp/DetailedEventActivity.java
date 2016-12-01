@@ -136,9 +136,9 @@ public class DetailedEventActivity extends AppCompatActivity {
     }
 
     public void addDetailedEventtoMap(View view) {
-        ArrayList<MapDetails> locations = new ArrayList();
-        locations.add(E.returnMapDetails());
-        Log.e("location", String.valueOf(E.returnMapDetails()));
+        ArrayList<MapEventListing> locations = new ArrayList();
+        locations.add(E.returnMapEventListing());
+        Log.e("location", String.valueOf(E.returnMapEventListing()));
         Intent intent = new Intent(getApplicationContext(), MapActivity.class);
         intent.putExtra("locations", locations);
         startActivity(intent);

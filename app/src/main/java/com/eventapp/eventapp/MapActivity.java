@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
 
-    private ArrayList<MapDetails> locations;
+    private ArrayList<MapEventListing> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<MapDetails> locations = (ArrayList<MapDetails>) getIntent().getExtras().getSerializable("locations");
+        ArrayList<MapEventListing> locations = (ArrayList<MapEventListing>) getIntent().getExtras().getSerializable("locations");
         setContentView(R.layout.activity_maps);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
