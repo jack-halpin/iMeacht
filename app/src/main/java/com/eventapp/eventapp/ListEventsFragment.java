@@ -343,8 +343,9 @@ public class ListEventsFragment extends Fragment {
                 //When searching for music later on. If the field isn't supplied it will be
                 //set to 'Unknown' in the EventListing object
                 String name;
-                if(currEvent.isNull("performers") || currEvent.getString("performers").charAt(0) == '{'){
-                    name = "Unknown";
+                Log.e("performer:", currEvent.getString("performers"));
+                if(currEvent.isNull("performers") || currEvent.getJSONObject("performers").getString("performer").charAt(0) == '['){
+                    name = "Unknown Artist";
                 } else {
                     name = currEvent.getJSONObject("performers").getJSONObject("performer").getString("name");
                 }
