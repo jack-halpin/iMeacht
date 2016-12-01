@@ -18,25 +18,25 @@
     </string-array>
 
     <string-array name="drawer_array">
-        <item>Search will allow you to search for specific events</item>
-        <item>Event Map will place each event shown onto a map</item>
-        <item>My Events will show events stored by you</item>
-        <item>About will tell you more about our App</item>
+        <item>Search allows you to search for specific events and categories</item>
+        <item>Event Map places fetched events on a map</item>
+        <item>Favourites shows your stored events</item>
+        <item>About provides a brief synopsis of our App</item>
     </string-array>
 
     <string-array name="tutorial_array">
-        <item>Welcome to Event App</item>
-        <item>On the this screen, you will see the results of a search</item>
-        <item>In order to customise your searched, you will be brought to the preferences section</item>
+        <item>Welcome to Event App!</item>
+        <item>This screen shows suggested events as filtered by your preferences</item>
+        <item>In order to customise your experience, please choose a selection of categories</item>
     </string-array>
 
     <string-array name="event_tutorial_array">
         <item>This is the Detailed Event Screen</item>
-        <item>Save Event will add the event to your My Event page, for easy access</item>
-        <item>Map Event will show you the location of the event on a map</item>
-        <item>The share icon on the action bar will share the event in a variety of ways</item>
-        <item>The play icon on the action bar will play a sample of the artist\'s music in your default music player</item>
-        <item>The calendar icon on the action bar will add the event to your default Calendar application</item>
+        <item>Save Event adds the listing to your Favourites page (for easy retrieval)</item>
+        <item>Calendar notes the event details in your selected Calendar application</item>
+        <item>Map Event shows the location of the event on an interactive Google map</item>
+        <item>The Share icon on the action bar allows you to share the event using any installed messaging or email application</item>
+        <item>The Play icon on the action bar opens the artist\'s music in your preferred music or streaming client</item>
 
     </string-array>
 
@@ -112,7 +112,7 @@
 
     <string name="about_us"><font color='#FF9800'>imeacht</font> is an app built by
     <b>Brendan Dwyer, Conor Devoy, Devin Stacey, Jack Halpin and Patrick Harney</b>
-     who are Computer Science students at the University College Dublin.\n\n
+     who are Computer Science students at University College Dublin.\n\n
 
     We created this app to allow people to discover new and fun things to do around their area and share them with their friends! All the information
     is supplied by eventful, you can check them out www.eventful.com!</string>.
