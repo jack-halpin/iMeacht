@@ -1,7 +1,9 @@
 package com.eventapp.eventapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.Set;
 
 /**
  * Created by devin on 22/11/16.
@@ -69,7 +73,11 @@ public class SearchActivity extends AppCompatActivity {
         EditText medit = (EditText)findViewById(R.id.location_editText);
         String location =  medit.getText().toString();
         Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
-        String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+        
+        int position = spinner.getSelectedItemPosition();
+        String[] selectedArray = getResources().getStringArray(R.array.preferences_values);
+        String category = selectedArray[position];
+
         Spinner spinner1 = (Spinner) findViewById(R.id.sortby_spinner);
         String sortby = spinner1.getItemAtPosition(spinner1.getSelectedItemPosition()).toString();
 
