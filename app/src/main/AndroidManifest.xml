@@ -58,8 +58,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Preferences" />
-
         <activity android:name=".EventPreferencesActivity" />
 
         <activity android:name=".SavedEventsActivity" />
