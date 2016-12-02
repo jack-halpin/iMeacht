@@ -63,7 +63,6 @@ public class ListEventsFromDBFragment  extends Fragment {
         return rootView;
     }
 
-
     public void getEventInfo(){
         if (eventLists.isEmpty() == true){
             Log.e("E", "is empty");
