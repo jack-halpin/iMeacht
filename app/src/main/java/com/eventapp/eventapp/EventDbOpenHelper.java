@@ -154,7 +154,21 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         }
         Log.e("getAllSavedEventIDS()", savedEventIDS.toString());
 
+        cursor.close();
+        db.close();
         return savedEventIDS;
+    }
+
+    public void deleteEventById(String id) {
+        
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + ACT_ID + "='" + id + "'";
+//        Log.e("The query", query);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        cursor.close();
+        db.close();
     }
 
     // deletes the database

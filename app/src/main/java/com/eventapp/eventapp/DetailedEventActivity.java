@@ -132,6 +132,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
         for(String str: eventList) {
             if(str.trim().contains(id_check)) {
+                db.deleteEventById(id_check);
                 Context context = getApplicationContext();
                 CharSequence text = "Event Deleted from Favourites!";
 
@@ -140,7 +141,6 @@ public class DetailedEventActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-
 
                 return false;
                 }
