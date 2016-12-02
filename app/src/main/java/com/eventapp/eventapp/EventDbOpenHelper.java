@@ -23,6 +23,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
     final static String ACT_TITLE = "title";
     final static String ACT_IMG_URL = "img_url";
     final static String ACT_DATE = "date";
+    final static String END_TIME = "end_time";
     final static String ACT_DETAILS = "details";
     final static String ACT_VENUE = "venue";
     final static String ACT_URL = "url";
@@ -31,7 +32,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
     final static String ALL_DAY = "all_day";
     final static String LAT = "lat";
     final static String LNG = "lng";
-    final static String [] columns = { ACT_TITLE, ACT_IMG_URL, ACT_ID, ACT_DATE, ACT_DETAILS, ACT_VENUE, ACT_URL, ACT_NAME, VENUE_ADDRESS, ALL_DAY, LAT, LNG };
+    final static String [] columns = { ACT_TITLE, ACT_IMG_URL, ACT_ID, ACT_DATE, END_TIME, ACT_DETAILS, ACT_VENUE, ACT_URL, ACT_NAME, VENUE_ADDRESS, ALL_DAY, LAT, LNG };
 
     // creates the database
     final private static String CREATE_CMD =
@@ -41,6 +42,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
             + ACT_TITLE + " TEXT NOT NULL, "
             + ACT_IMG_URL + " TEXT, "
             + ACT_DATE + " TEXT, "
+            + END_TIME + " TEXT, "
             + ACT_DETAILS + " TEXT, "
             + ACT_VENUE + " TEXT, "
             + ACT_URL + " TEXT NOT NULL, "
@@ -73,7 +75,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
     }
 
     // add events to the db
-    public void addEvent(String id, String title, String img_url, String date, String details, String venue, String url, String name, String venue_address, boolean all_day, Double lat, Double lng) {
+    public void addEvent(String id, String title, String img_url, String date, String end_time, String details, String venue, String url, String name, String venue_address, boolean all_day, Double lat, Double lng) {
         Log.e("addEventID", id);
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -82,6 +84,7 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
         value.put(ACT_TITLE, title);
         value.put(ACT_IMG_URL, img_url);
         value.put(ACT_DATE, date);
+        value.put(END_TIME, end_time);
         value.put(ACT_DETAILS, details);
         value.put(ACT_VENUE, venue);
         value.put(ACT_URL, url);
@@ -113,14 +116,15 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
                 e.setTitle(cursor.getString(1));
                 e.setImgUrl(cursor.getString(2));
                 e.setDate(cursor.getString(3));
-                e.setDetails(cursor.getString(4));
-                e.setVenueName(cursor.getString(5));
-                e.setUrl(cursor.getString(6));
-                e.setArtistName(cursor.getString(7));
-                e.setVenueAddress(cursor.getString(8));
-                e.setAllDay(cursor.getString(9));
-                e.setLat(cursor.getString(10));
-                e.setLng(cursor.getString(11));
+                e.setEndTimes(cursor.getString(4));
+                e.setDetails(cursor.getString(5));
+                e.setVenueName(cursor.getString(6));
+                e.setUrl(cursor.getString(7));
+                e.setArtistName(cursor.getString(8));
+                e.setVenueAddress(cursor.getString(9));
+                e.setAllDay(cursor.getString(10));
+                e.setLat(cursor.getString(11));
+                e.setLng(cursor.getString(12));
                 list.add(e);
             } while (cursor.moveToNext());
         }

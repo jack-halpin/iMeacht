@@ -219,6 +219,10 @@ public class EventListing implements Parcelable {
 
     public void setDate(String date) { this.date = date; }
 
+    public String getEndTimes() { return this.endTime; }
+
+    public void setEndTimes(String endTime) { this.endTime = endTime;}
+
     public String getDetails() { return this.detail; }
 
     public void setDetails(String detail) { this.detail = detail; }
