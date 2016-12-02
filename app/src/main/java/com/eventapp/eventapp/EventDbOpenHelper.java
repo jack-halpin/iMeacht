@@ -160,14 +160,11 @@ public class EventDbOpenHelper extends SQLiteOpenHelper {
     }
 
     public void deleteEventById(String id) {
-        
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + ACT_ID + "='" + id + "'";
-//        Log.e("The query", query);
+
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        db.delete(TABLE_NAME, ACT_ID + "='" + id + "'", null);
 
-        cursor.close();
         db.close();
     }
 
