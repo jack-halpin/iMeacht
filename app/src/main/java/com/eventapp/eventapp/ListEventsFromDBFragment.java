@@ -3,16 +3,21 @@ package com.eventapp.eventapp;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static com.google.android.gms.internal.zzng.fe;
 
 /**
  * Created by Jack on 29/11/2016.
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 public class ListEventsFromDBFragment  extends Fragment {
 
     private EventAdapter eventLists;
+    private FetchEventInfoFromDB fetch; //AsyncTask used to get info from the EventFul API
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,19 +70,13 @@ public class ListEventsFromDBFragment  extends Fragment {
     }
 
     public void getEventInfo(){
-        if (eventLists.isEmpty() == true){
-            Log.e("E", "is empty");
-            FetchEventInfoFromDB fetch = new FetchEventInfoFromDB();
-            fetch.execute();
-        }
-        //Here we will create a new async FetchEventInfo class and tell it to do it's stuff
-        Log.e("getEventInfo:", "called");
+        fetch = new FetchEventInfoFromDB();
+        fetch.execute();
 
     }
 
     @Override
     public void onStart(){
-        Log.e("onStart", "called");
         super.onStart();
         getEventInfo();
     }
@@ -84,6 +84,11 @@ public class ListEventsFromDBFragment  extends Fragment {
     public class FetchEventInfoFromDB extends AsyncTask<Void, Void, EventListing[]> {
 
         private final String LOG_TAG = ListEventsFragment.FetchEventInfo.class.getSimpleName();
+
+        @Override
+        protected void onPreExecute(){
+            eventLists.clear();
+        }
 
         @Override
         protected EventListing[] doInBackground(Void... params) {
