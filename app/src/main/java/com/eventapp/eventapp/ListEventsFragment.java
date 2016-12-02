@@ -54,6 +54,7 @@ public class ListEventsFragment extends Fragment {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Set<String> selected = sharedPref.getStringSet(getResources().getString(R.string.pref_persistent_storage), null);
         String location = sharedPref.getString("location", null);
+        String no_pages = sharedPref.getString("pref_no_pages", null);
         if (selected != null) {
             //Add the list of preferences onto the url segment
             int size = selected.size();
@@ -66,9 +67,16 @@ public class ListEventsFragment extends Fragment {
                     count++;
                 }
             }
+
             //Finally add the users location
             location = location.replaceAll(" ", "+");
+
             user_pref += "&location=" + location;
+
+            //Finally add the number of results the user wants to show
+            user_pref += "&page_size=" + no_pages;
+
+            
 
             return user_pref;
         } else {

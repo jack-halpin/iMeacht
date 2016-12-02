@@ -105,11 +105,18 @@
         <item>Technology</item>
     </string-array>
 
+    <string-array name="no_pages">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
     <string-array name="sortby_options">
         <item>Popularity</item>
         <item>Date</item>
         <item>Relevance</item>
     </string-array>
+
 
     <string name="about_us"><font color='#FF9800'>imeacht</font> is an app built by
     <b>Brendan Dwyer, Conor Devoy, Devin Stacey, Jack Halpin and Patrick Harney</b>

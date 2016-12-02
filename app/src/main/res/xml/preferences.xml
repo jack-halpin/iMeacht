@@ -13,4 +13,13 @@
         android:defaultValue="Dublin"
         android:inputType="text"
         android:singleLine="true" />
+
+    <ListPreference
+        android:key="pref_no_pages"
+        android:title="Results To Display"
+        android:summary="Choose how many results you would like to see for your searches."
+        android:entries="@array/no_pages"
+        android:entryValues="@array/no_pages"
+        android:defaultValue="10"/>
+
 </PreferenceScreen>
