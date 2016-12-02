@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -73,12 +74,24 @@ public class DetailedEventActivity extends AppCompatActivity {
         TextView v5 = (TextView) findViewById(R.id.textView5);
         v5.setText(E.getDetails());
 
+        EventDbOpenHelper db = new EventDbOpenHelper(this);
+        String id_check = E.getId();
+        List<String> eventList = db.getAllSavedEventsIDS();
+        for(String str: eventList) {
+            if(str.trim().contains(id_check)) {
+                Button button = (Button) findViewById(R.id.save_button);
+                button.setText(getResources().getString(R.string.deleteevent));
+            }
+        }
+
         if (pref.getBoolean("firstTimeEvent", true)) {
             helpers.tutorial(event_tutorial_array, tutorialLayout, tutorialText, this);
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("firstTimeEvent", false);
             editor.apply();
         }
+
+
 
 
         getSupportActionBar().setTitle("Event Details");
@@ -111,6 +124,7 @@ public class DetailedEventActivity extends AppCompatActivity {
     // Save button listener method
     public boolean addSavedEvent(View view) {
         // method adds the event to the database
+        Button button = (Button) findViewById(R.id.save_button);
         EventDbOpenHelper db = new EventDbOpenHelper(this);
 
         String id_check = E.getId();
@@ -119,11 +133,15 @@ public class DetailedEventActivity extends AppCompatActivity {
         for(String str: eventList) {
             if(str.trim().contains(id_check)) {
                 Context context = getApplicationContext();
-                CharSequence text = "Event Has Already Been Saved!";
-                int duration = Toast.LENGTH_SHORT;
+                CharSequence text = "Event Deleted from Favourites!";
 
+                button.setText(getResources().getString(R.string.saveevent));
+
+                int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+
                 return false;
                 }
             }
@@ -131,6 +149,7 @@ public class DetailedEventActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         CharSequence text = "Event Saved!";
+        button.setText(getResources().getString(R.string.deleteevent));
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
