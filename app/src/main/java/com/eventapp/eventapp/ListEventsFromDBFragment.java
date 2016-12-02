@@ -37,15 +37,6 @@ public class ListEventsFromDBFragment  extends Fragment {
         // Get ListView object from xml
         ListView listView = (ListView) rootView.findViewById(R.id.activity_list);
 
-        // Defined Array values to show in ListView
-
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
         eventLists = new EventAdapter(getActivity(), R.layout.event_list_entry, new ArrayList<EventListing>());
 
 
@@ -55,7 +46,6 @@ public class ListEventsFromDBFragment  extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Log.e("Logger:", Integer.toString(position));
 
                 Context context = getActivity();
                 EventListing a = eventLists.getItem(position);
@@ -95,6 +85,7 @@ public class ListEventsFromDBFragment  extends Fragment {
             //Read in the event objects from the database
             EventDbOpenHelper db = new EventDbOpenHelper(getActivity());
 
+            //Get an ArrayList of Objects from the database
             ArrayList<EventListing> savedEvents = db.getAllSavedEvents();
             EventListing[] events = new EventListing[savedEvents.size()];
 
@@ -113,7 +104,6 @@ public class ListEventsFromDBFragment  extends Fragment {
             //For each object in the array, add them ot eventLists
 
             for (int i = 0; i < results.length; i++) {
-
                 eventLists.add(results[i]);
             }
         }
